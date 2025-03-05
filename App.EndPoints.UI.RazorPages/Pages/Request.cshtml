@@ -1,0 +1,71 @@
+﻿@page
+@model App.EndPoints.UI.RazorPages.Pages.RequestModel
+@{
+}
+
+<section class="gray py-5 position-relative">
+    <div class="container">
+        <div class="row">
+
+            <!-- Main Content -->
+            <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
+
+                <!-- About The Business -->
+                <div class="bg-white rounded mb-4">
+                    <div class="jbd-01 px-4 py-4">
+                        <div class="jbd-details">
+                            <h5 class="ft-bold fs-lg ff-second">@Model.SelectedService.Title</h5>
+                            <div class="d-block mt-3">
+                                <p>@Model.SelectedService.Description</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+
+                <!-- Order Booking Form -->
+                @if (User.IsInRole("Customer"))
+                {
+                    <div class="jb-apply-form bg-white rounded py-4 px-4 box-static mb-4">
+                        <h4 class="ft-bold mb-1 ff-second fs-5">ثبت سفارش</h4>
+
+                        <form class="_apply_form_form" method="post">
+                            <!-- Hidden Input for Service ID -->
+                            <input asp-for="@Model.ServiceRequest.ServiceId" type="hidden" value="@Model.SelectedService.Id" />
+
+                            <!-- Customer Description -->
+                            <div class="form-group">
+                                <label class="mb-1">توضیحات</label>
+                                <textarea asp-for="@Model.ServiceRequest.CustomerDescription" cols="40" rows="3" class="form-control with-light" placeholder="متن توضیحات..."></textarea>
+                                <span asp-validation-for="@Model.ServiceRequest.CustomerDescription" class="text-danger"></span>
+                            </div>
+
+                            <!-- Price Proposal -->
+                            <div class="form-group">
+                                <label class="mb-1">قیمت پیشنهادی</label>
+                                <input asp-for="@Model.ServiceRequest.Price" type="number" class="form-control rounded" placeholder="قیمت خود را وارد کنید" />
+                                <span asp-validation-for="@Model.ServiceRequest.Price" class="text-danger"></span>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="form-group mt-5">
+                                <button type="submit" class="btn btn-md rounded theme-bg text-light ft-medium fs-sm full-width">ثبت سفارش</button>
+                            </div>
+                        </form>
+                    </div>
+                }
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Include Validation Scripts -->
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

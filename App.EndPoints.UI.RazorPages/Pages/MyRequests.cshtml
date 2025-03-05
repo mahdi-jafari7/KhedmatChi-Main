@@ -1,0 +1,56 @@
+﻿@page
+@using App.Domain.AppServices.Customer
+@using App.Domain.Core.Customer.AppServices
+@using Framework
+@model App.EndPoints.UI.RazorPages.Pages.MyRequestsModel
+@inject IServiceRequestAppService _serviceRequestAppService
+
+<div class="goodup-dashboard-wrap gray px-4 py-5">
+
+
+    <div class="goodup-dashboard-content">
+        <div class="dashboard-tlbar d-block mb-5">
+            <div class="row">
+                <div class="colxl-12 col-lg-12 col-md-12">
+                    <h1 class="ft-medium fs-lg">آگهی های من</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-listing-wraps d-flex flex-wrap gap-3">
+            @foreach (var request in @Model.MyRequests)
+            {
+                <div class="card shadow-sm border-0 p-3" style="width: 18rem;">
+                    <img src="@request.ServiceImageUrl" class="card-img-top img-fluid rounded-top" alt="@request.ServiceName" />
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold text-primary">@request.ServiceName</h5>
+                        <p class="text-muted"><i class="fas fa-info-circle me-1"></i>وضعیت: <span class="fw-semibold">@request.Status.GetEnumDisplayName()</span></p>
+                        <p class="text-success fw-bold"><i class="fas fa-dollar-sign me-1"></i> قیمت پایه: @request.Price</p>
+
+                        <div class="alert alert-primary d-flex align-items-center">
+                            <i class="fas fa-envelope-open-text me-2"></i> پیشنهاد دریافت کرده‌اید:
+                            <span class="fw-bold ms-1">@request.ProposalsCount</span>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a asp-page="Suggestions" asp-route-serviceRequestId="@request.Id" class="btn btn-primary">
+                                <i class="fas fa-eye ms-1"></i> نمایش پیشنهادات
+                            </a>
+
+                            <form asp-page-handler="Delete" method="post">
+                                <input type="hidden" name="requestId" value="@request.Id" />
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="fas fa-trash ms-1"></i> حذف
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+
+
+    </div>
+
+</div>

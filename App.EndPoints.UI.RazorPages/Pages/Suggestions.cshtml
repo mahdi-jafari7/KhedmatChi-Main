@@ -1,0 +1,174 @@
+﻿@page
+@using App.Domain.Core.Customer.Enums
+@using Framework
+@model App.EndPoints.UI.RazorPages.Pages.SuggestionsModel
+@{
+    // var serviceRequestId = ViewData["serviceRequestId"];
+}
+
+<!-- ======================= dashboard Detail ======================== -->
+<div class="goodup-dashboard-wrap gray px-4 py-5">
+
+    <div class="goodup-dashboard-content">
+        <div class="dashboard-tlbar d-block mb-5">
+            <div class="row">
+                <div class="colxl-12 col-lg-12 col-md-12">
+                    <h1 class="ft-medium fs-lg">لیست پیشنهادات</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-widg-bar d-block">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12">
+                    <div class="dashboard-list-wraps bg-white rounded mb-4">
+                        <div class="dashboard-list-wraps-head br-bottom py-3 px-3">
+                            <div class="dashboard-list-wraps-flx">
+                                <h4 class="mb-0 ft-medium fs-md"><i class="fas fa-shopping-basket ms-2 theme-cl fs-sm"></i>لیست پیشنهادات</h4>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-list-wraps-body py-3 px-3">
+                            <div class="dashboard-bookings-wraps">
+
+                                @foreach (var suggestion in Model.Suggestions)
+                                {
+                                    <!-- Single booking List -->
+                                    @* <form method="post"> *@
+                                    <div class="dsd-single-bookings-wraps">
+                                        <div class="dsd-single-book-thumb"><a asp-page="Comment" asp-route-expertId="@suggestion.ExpertId" asp-route-requestStatus="@suggestion.ServiceRequestStatus" asp-route-serviceRequestId="@suggestion.ServiceRequestId"><img src="@suggestion.ExpertProfileImage" class="img-fluid circle" alt="" /></a></div>
+                                        <div class="dsd-single-book-caption">
+                                            <div class="dsd-single-book-title"><h5>@suggestion.ExpertFirstName @suggestion.ExpertLastName <span class="bko-dates">@suggestion.ProposalCreatedAt.Value.ToPersianString("dddd, dd MMMM,yyyy")</span></h5></div>
+                                            <div class="ico-content">
+                                                <ul>
+                                                    @if (suggestion.IsAccepted is true)
+                                                    {
+                                                        <li><div class="px-2 py-1 medium bg-light-info rounded text-info">@suggestion.ProposalStatus.GetEnumDisplayName()</div></li>
+                                                    }
+                                                    else if (suggestion.IsAccepted is false)
+                                                    {
+                                                        <li><div class="px-2 py-1 medium bg-light-danger rounded text-danger">رد شده</div></li>
+                                                    }
+                                                    else if (suggestion.IsDeleted is true)
+                                                    {
+                                                        <li><div class="px-2 py-1 medium bg-light-danger rounded text-danger">این پیشنهاد توسط کارشناس کنسل شد</div></li>
+                                                    }
+                                                    else
+                                                    {
+                                                        <li><div class="px-2 py-1 medium bg-light-warning rounded text-warning">@suggestion.ProposalStatus.GetEnumDisplayName()</div></li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                            <div class="dsd-single-descr">
+                                                <div class="dsd-single-item"><span class="dsd-item-title">نام مشتری:</span><span class="dsd-item-info">@suggestion.CustomerFirstName @suggestion.CustomerLastName</span></div>
+                                                <div class="dsd-single-item"><span class="dsd-item-title">شماره موبایل مشتری:</span><span class="dsd-item-info">@suggestion.CustomerPhoneNumber</span></div>
+                                                <div class="dsd-single-item"><span class="dsd-item-title">ایمیل مشتری:</span><span class="dsd-item-info">@suggestion.CustomerEmail</span></div>
+                                                <div class="dsd-single-item"><span class="dsd-item-title">دسته‌بندی:</span><span class="dsd-item-info">@suggestion.CategoryName</span></div>
+                                                <div class="dsd-single-item"><span class="dsd-item-title">سرویس:</span><span class="dsd-item-info">@suggestion.ServiceName</span></div>
+                                                <div class="dsd-single-item"><span class="dsd-item-title">توضیحات مشتری:</span><span class="dsd-item-info">@suggestion.CustomerDescription</span></div>
+                                                <div class="dsd-single-item"><span class="dsd-item-title">مبلغ‌پیشنهادی‌مشتری:</span><span class="dsd-item-info">@suggestion.CustomerSuggestedPrice</span> تومان</div>
+                                                <div class="dsd-single-item"><span class="dsd-item-title">تاریخ ایجاد درخواست:</span><span class="dsd-item-info">@suggestion.ServiceRequestCreatedAt.Value.ToPersianString("dddd, dd MMMM,yyyy")</span></div>
+                                                <div class="dsd-single-item"><span class="dsd-item-title">شماره موبایل کارشناس:</span><span class="dsd-item-info">@suggestion.ExpertPhoneNumber</span></div>
+                                                <div class="dsd-single-item"><span class="dsd-item-title">ایمیل کارشناس:</span><span class="dsd-item-info">@suggestion.ExpertEmail</span></div>
+                                                <div class="dsd-single-item"><span class="dsd-item-title">توضیحات کارشناس: </span><span class="dsd-item-info">@suggestion.ExpertDescription</span></div>
+                                                <div class="dsd-single-item"><span class="dsd-item-title">مبلغ‌پیشنهادی‌کارشناس:</span><span class="dsd-item-info">@suggestion.ExpertSuggestedPrice</span> تومان</div>
+                                            </div>
+                                            <div class="dsd-single-book-footer">
+                                                @if (suggestion.IsAccepted is true)
+                                                {
+                                                    <a href="" class="btn btn-aprd mr-1 disabled"><i class="fas fa-check-circle ms-1"></i>تایید شده</a>
+                                                    @if (suggestion.ServiceRequestStatus == ServiceRequestStatus.Success)
+                                                    {
+                                                        <a href="" class="btn btn-aprd mr-1 disabled"><i class="fas fa-check-circle ms-1"></i>با موفقیت انجام‌شد</a>
+                                                        <ul>
+                                                            <li>
+                                                                <div class="px-2 py-1 medium bg-light-info rounded text-info">
+                                                                    شما اکنون می‌توانید برای این کارشناس کامنت ارسال کنید
+                                                                </div>
+                                                                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#commentModal" onclick="setExpertId(@suggestion.ExpertId)">ثبت کامنت</button>
+                                                            </li>
+                                                        </ul>
+                                                    }
+                                                    else if (suggestion.ServiceRequestStatus == ServiceRequestStatus.Failed)
+                                                    {
+                                                        <a class="btn btn-reject mr-1 disabled"><i class="fas fa-check-circle ms-1"></i>درخواست با موفقیت انجام‌نشد</a>
+                                                        <ul>
+                                                            <li>
+                                                                <div class="px-2 py-1 medium bg-light-warning rounded text-warning">
+                                                                    شما اکنون می‌توانید برای این کارشناس کامنت ارسال کنید
+                                                                </div>
+                                                                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#commentModal" onclick="setExpertId(@suggestion.ExpertId)">ثبت کامنت</button>
+                                                            </li>
+                                                        </ul>
+                                                    }
+                                                }
+                                            </div>
+                                            <!-- مودال ثبت کامنت -->
+                                            <div class="modal" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" data-bs-backdrop="false">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="commentModalLabel">ثبت کامنت</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form id="commentForm">
+                                                                <input type="hidden" id="expertId" name="expertId" />
+                                                                <div class="mb-3">
+                                                                    <label for="commentText" class="form-label">متن کامنت</label>
+                                                                    <textarea class="form-control" id="commentText" name="commentText" rows="3"></textarea>
+                                                                </div>
+                                                                <button type="button" class="btn btn-success" onclick="submitComment()">ارسال کامنت</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    @* </form> *@
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- ======================= dashboard Detail End ======================== -->
+
+<script>
+    function setExpertId(expertId) {
+        document.getElementById('expertId').value = expertId;
+    }
+
+    function submitComment() {
+        var expertId = document.getElementById('expertId').value;
+        var commentText = document.getElementById('commentText').value;
+
+        fetch('/Comment/AddComment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                expertId: expertId,
+                commentText: commentText
+            })
+        }).then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('کامنت با موفقیت ثبت شد!');
+                location.reload();
+            } else {
+                alert('خطایی رخ داده است!');
+            }
+        });
+    }
+</script>
