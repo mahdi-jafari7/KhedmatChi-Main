@@ -1,13 +1,14 @@
 ﻿@page
 @using App.Domain.AppServices.Expert
+@using App.Domain.Core.Contract.AppService_Interfaces
 @using App.Domain.Core.Expert.AppServices
-@inject ICategoryAppService CategoryAppService
-@model App.EndPoints.UI.RazorPages.Areas.Admin.Pages.Category.IndexModel
+@inject IMainCategoryAppService MainCategoryAppService
+@model App.EndPoints.UI.RazorPages.Areas.Admin.Pages.MainCategory.IndexModel
 @{
     Layout = "Shared/_AdminLayout";
 }
 
-<a href="@Url.Page("Create")" type="button" class="btn rounded-pill btn-primary btn-medium">افزودن دسته بندی جدید</a>
+<a href="@Url.Page("Create")" type="button" class="btn rounded-pill btn-primary btn-medium">افزودن دسته بندی اصلی جدید</a>
 
 <div class="table-responsive text-nowrap">
     <table class="table card-table">
@@ -21,24 +22,23 @@
             </tr>
         </thead>
         <tbody class="table-border-bottom-0">
-            @foreach (var category in await CategoryAppService.GetCategories(default))
+            @foreach (var mainCategory in await MainCategoryAppService.GetMainCategories(default))
             {
                 <tr>
-                    <td><strong>@category.Id</strong></td>
-                    <td>@category.Title</td>
+                    <td><strong>@mainCategory.Id</strong></td>
+                    <td>@mainCategory.Title</td>
                     <td>
                         <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
                             <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" aria-label="تونی استارک" data-bs-original-title="تونی استارک">
-                                <img src="@category.Image" alt="آواتار" class="rounded-circle">
+                                <img src="@mainCategory.Image" alt="آواتار" class="rounded-circle">
                             </li>
                         </ul>
                     </td>
                     <td>
-                        @if (category.IsDeleted == false)
+                        @if (mainCategory.IsDeleted == false)
                         {
                             <span class="badge bg-label-primary me-1">فعال</span>
-                        }
-                        else
+                        }else
                         {
                             <span class="badge bg-label-warning me-1">غیرفعال</span>
                         }
@@ -49,9 +49,9 @@
                                 <i class="bx bx-dots-vertical-rounded"></i>
                             </button>
                             <div class="dropdown-menu" style="">
-                                <a asp-page="Update" asp-route-id="@category.Id" class="dropdown-item"><i class="bx bx-edit-alt me-1"></i> ویرایش</a>
-                                <a asp-page-handler="Delete" asp-route-id="@category.Id" class="dropdown-item"> <i class="bx bx-trash me-1"></i> غیرفعال کردن</a>
-                                <a asp-page-handler="Restore" asp-route-id="@category.Id" class="dropdown-item"> <i class="bx bx-trash me-1"></i> فعال کردن</a>
+                                <a asp-page="Update" asp-route-id="@mainCategory.Id" class="dropdown-item"><i class="bx bx-edit-alt me-1"></i> ویرایش</a>
+                                <a asp-page-handler="Delete" asp-route-id="@mainCategory.Id" class="dropdown-item"> <i class="bx bx-trash me-1"></i> غیرفعال کردن</a>
+                                <a asp-page-handler="Restore" asp-route-id="@mainCategory.Id" class="dropdown-item"> <i class="bx bx-trash me-1"></i> فعال کردن</a>
                             </div>
                         </div>
                     </td>

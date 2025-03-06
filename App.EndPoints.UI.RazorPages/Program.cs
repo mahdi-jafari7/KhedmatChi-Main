@@ -6,6 +6,9 @@ using App.Domain.Core.Admin.Data;
 using App.Domain.Core.Admin.Entities;
 using App.Domain.Core.Admin.Entities.Configs;
 using App.Domain.Core.Admin.Services;
+using App.Domain.Core.Contract.AppService_Interfaces;
+using App.Domain.Core.Contract.Repository_Interfaces;
+using App.Domain.Core.Contract.Service_Interfaces;
 using App.Domain.Core.Customer.AppServices;
 using App.Domain.Core.Customer.Data;
 using App.Domain.Core.Customer.Services;
@@ -74,6 +77,12 @@ builder.Services.AddScoped<IProvinceAppService, ProvinceAppService>();
 builder.Services.AddScoped<IServiceRequestRepository, ServiceRequestRepository>();
 builder.Services.AddScoped<IServiceRequestService, ServiceRequestService>();
 builder.Services.AddScoped<IServiceRequestAppService, ServiceRequestAppService>();
+#endregion
+
+#region MainCategoryDI
+builder.Services.AddScoped<IMainCategoryRepository,MainCategoryRepository>();
+builder.Services.AddScoped<IMainCategoryService,MainCategoryService>();
+builder.Services.AddScoped<IMainCategoryAppService,MainCategoryAppService>();
 #endregion
 
 #region CategoryDI

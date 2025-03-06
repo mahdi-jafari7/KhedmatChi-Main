@@ -40,6 +40,7 @@ namespace App.Infra.Db.SqlServer.Ef.DbContext
             modelBuilder.ApplyConfiguration(new AddressEntityConfig());
             modelBuilder.ApplyConfiguration(new SkillEntityConfig());
             modelBuilder.ApplyConfiguration(new CityEntityConfig());
+            modelBuilder.ApplyConfiguration(new MainCategoryEntityConfig());
             //modelBuilder.ApplyConfiguration(new ProvinceEntityConfig());
 
             UserConfigurations.SeedUsers(modelBuilder);
@@ -51,6 +52,7 @@ namespace App.Infra.Db.SqlServer.Ef.DbContext
         public DbSet<Expert> Experts { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<MainCategory> MainCategories { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<ServiceRequest> ServiceRequests { get; set; }

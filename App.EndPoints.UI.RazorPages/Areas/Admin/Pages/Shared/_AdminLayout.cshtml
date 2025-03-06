@@ -109,13 +109,18 @@
 
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a asp-area="Admin" asp-page="/Service/Index" class="menu-link">
-                                    <div data-i18n="Content navbar">خدمات</div>
+                                <a asp-area="Admin" asp-page="/MainCategory/Index" class="menu-link">
+                                    <div data-i18n="Content navbar">دسته بندی اصلی</div>
                                 </a>
                             </li>
                             <li class="menu-item">
                                 <a asp-area="Admin" asp-page="/Category/Index" class="menu-link">
-                                    <div data-i18n="Collapsed menu">دسته بندی‌ها</div>
+                                    <div data-i18n="Content navbar">زیر دسته بندی</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a asp-area="Admin" asp-page="/Service/Index" class="menu-link">
+                                    <div data-i18n="Content navbar">خدمات</div>
                                 </a>
                             </li>
                             <li class="menu-item">
@@ -124,7 +129,7 @@
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a asp-area="Admin" asp-page="/Request/Index" class="menu-link">
+                                <a asp-area="admin" asp-page="/Request/Index" class="menu-link">
                                     <div data-i18n="Horizontal">درخواست‌ها</div>
                                 </a>
                             </li>
