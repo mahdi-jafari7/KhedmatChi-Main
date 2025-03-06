@@ -8,6 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Customer\**" />
+    <Compile Remove="Areas\Expert\**" />
+    <Content Remove="Areas\Customer\**" />
+    <Content Remove="Areas\Expert\**" />
+    <EmbeddedResource Remove="Areas\Customer\**" />
+    <EmbeddedResource Remove="Areas\Expert\**" />
+    <None Remove="Areas\Customer\**" />
+    <None Remove="Areas\Expert\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
@@ -27,8 +38,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Customer\" />
-    <Folder Include="Areas\Expert\" />
     <Folder Include="wwwroot\uploads\" />
   </ItemGroup>
 

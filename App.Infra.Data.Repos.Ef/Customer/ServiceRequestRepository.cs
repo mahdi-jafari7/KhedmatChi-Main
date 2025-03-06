@@ -91,6 +91,8 @@ namespace App.Infra.Data.Repos.Ef.Customer
                     Price = sr.CustomerSuggestedPrice,
                     IsDone = sr.IsDone,
                     IsDeleted = sr.IsDeleted,
+                    CustomerName = $"{sr.Customer.FirstName} {sr.Customer.LastName}",
+                    ExpertName = $"{sr.Expert.FirstName} {sr.Expert.LastName}"
                 }).ToListAsync(cancellationToken);
 
                 if (serviceRequests is null)
@@ -111,18 +113,7 @@ namespace App.Infra.Data.Repos.Ef.Customer
             _logger.LogInformation("serviceRequestDtos returned from InMemoryCache.");
             return serviceRequests;
         }
-        //{
-        //    var serviceRequests = _homeServiceDbContext.ServiceRequests.ToListAsync();
-        //    if (serviceRequests != null)
-        //    {
-        //        return serviceRequests;
-        //    }
-        //    else
-        //    {
-        //        //throw an exception - will be implement!
-        //        throw new InvalidOperationException();
-        //    }
-        //}
+     
 
         //public async Task<ServiceRequest> HardDeleteServiceRequest(int serviceRequestId, CancellationToken cancellationToken)
         //{

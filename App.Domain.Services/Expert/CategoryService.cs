@@ -31,6 +31,7 @@ namespace App.Domain.Services.Expert
             creatingCategory.Title = categoryDto.Title;
             creatingCategory.Description = categoryDto.Description;
             creatingCategory.Image = categoryDto.Image;
+            creatingCategory.MainCategoryId = categoryDto.MainCategoryId;
             return await _categoryRepository.CreateCategory(creatingCategory, cancellationToken);
         }
 

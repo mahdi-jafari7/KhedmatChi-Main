@@ -17,6 +17,7 @@ namespace App.Domain.Core.Expert.DTOs
         public string Description { get; set; }
         public bool IsDeleted { get; set; } = false;
         public List<ServiceDto?>? Services { get; set; }
+        public int MainCategoryId { get; set; }
         //public DateTime CreatedAt { get; set; }
     }
 }

@@ -1,5 +1,7 @@
 ﻿@page
+@using App.Domain.Core.Contract.AppService_Interfaces
 @model App.EndPoints.UI.RazorPages.Areas.Admin.Pages.Category.CreateModel
+@inject IMainCategoryAppService mainCategoryAppService
 @{
     Layout = "Shared/_AdminLayout";
 }
@@ -22,6 +24,15 @@
                 <span asp-validation-for="@Model.CreatingCategory.Title" class="text-danger"></span>
             </div>
             <div class="mb-3">
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.CreatingCategory.MainCategoryId" class="form-label" for="multicol-country">دسته بندی</label>
+                <select asp-for="@Model.CreatingCategory.MainCategoryId" id="multicol-country" class="select2 form-select" data-allow-clear="true">
+                    @foreach (var maincategory in await mainCategoryAppService.GetMainCategories(default))
+                    {
+                        <option value="@maincategory.Id">@maincategory.Title</option>
+                    }
+                </select>
             </div>
             <div class="mb-3">
                 <label asp-for="@Model.CreatingCategory.Description" class="form-label" for="basic-default-message">توضیحات</label>
