@@ -33,6 +33,8 @@ namespace App.Domain.Services.Customer
             submittedComment.CustomerId = commentDto.CustomerId;
             submittedComment.ExpertId = commentDto.ExpertId;
             submittedComment.ServiceRequestId = commentDto.ServiceRequestId;
+            submittedComment.ServiceName = commentDto.ServiceName;
+            
             return await _commentRepository.CreateComment(submittedComment, cancellationToken);
         }
 

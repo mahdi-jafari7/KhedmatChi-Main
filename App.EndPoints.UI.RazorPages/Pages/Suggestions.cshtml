@@ -34,7 +34,7 @@
                                 @foreach (var suggestion in Model.Suggestions)
                                 {
                                     <!-- Single booking List -->
-                                    <form method="post">
+                                    @* <form method="post"> *@
                                     <div class="dsd-single-bookings-wraps">
                                         <div class="dsd-single-book-thumb"><a asp-page="Comment" asp-route-expertId="@suggestion.ExpertId" asp-route-requestStatus="@suggestion.ServiceRequestStatus" asp-route-serviceRequestId="@suggestion.ServiceRequestId"><img src="@suggestion.ExpertProfileImage" class="img-fluid circle" alt="" /></a></div>
                                         <div class="dsd-single-book-caption">
@@ -81,34 +81,60 @@
                                                     {
                                                         <a href="" class="btn btn-aprd mr-1 disabled"><i class="fas fa-check-circle ms-1"></i>با موفقیت انجام‌شد</a>
                                                         <ul>
-                                                            <li>
-                                                                <div class="px-2 py-1 medium bg-light-info rounded text-info">
-                                                                    شما اکنون می‌توانید برای این کارشناس کامنت ارسال کنید
-                                                                </div>
-                                                                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#commentModal" onclick="setExpertId(@suggestion.ExpertId)">ثبت کامنت</button>
-                                                            </li>
+                                                            <li><div class="px-2 py-1 medium bg-light-info rounded text-info">شما اکنون می‌توانید برای این کارشناس کامنت ارسال کنید</div></li>
                                                         </ul>
                                                     }
                                                     else if (suggestion.ServiceRequestStatus == ServiceRequestStatus.Failed)
                                                     {
                                                         <a class="btn btn-reject mr-1 disabled"><i class="fas fa-check-circle ms-1"></i>درخواست با موفقیت انجام‌نشد</a>
                                                         <ul>
-                                                            <li>
-                                                                <div class="px-2 py-1 medium bg-light-warning rounded text-warning">
-                                                                    شما اکنون می‌توانید با کلیک روی تصویر پروفایل کارشناس، کامنت خود را ارسال کنید
-                                                                </div>
-                                                                
-                                                            </li>
+                                                            <li><div class="px-2 py-1 medium bg-light-warning rounded text-warning">شما اکنون می‌توانید برای این کارشناس کامنت ارسال کنید</div></li>
                                                         </ul>
                                                     }
+                                                    else
+                                                    {
+                                                        <form asp-page-handler="Successful" method="post">
+                                                            <input type="hidden" asp-for="@Model.ServiceRequestProposalIds.ServiceRequestId" value="@suggestion.ServiceRequestId" />
+                                                            <input type="hidden" asp-for="@Model.ServiceRequestProposalIds.ProposalId" value="@suggestion.Id" />
+                                                            <input type="hidden" asp-for="@Model.ServiceRequestProposalIds.ProposalExpertId" value="@suggestion.ExpertId" />
+                                                            <button type="submit" class="btn btn-aprd mr-1"><i class="fas fa-check-circle ms-1"></i>درخواست با موفقیت انجام‌شد</button>
+                                                        </form>
+                                                        <form asp-page-handler="Unsuccessful" method="post">
+                                                            <input type="hidden" asp-for="@Model.ServiceRequestProposalIds.ServiceRequestId" value="@suggestion.ServiceRequestId" />
+                                                            <input type="hidden" asp-for="@Model.ServiceRequestProposalIds.ProposalId" value="@suggestion.Id" />
+                                                            <input type="hidden" asp-for="@Model.ServiceRequestProposalIds.ProposalExpertId" value="@suggestion.ExpertId" />
+                                                            <button type="submit" class="btn btn-reject mr-1"><i class="fas fa-check-circle ms-1"></i>درخواست با موفقیت انجام‌نشد</button>
+                                                        </form>
+                                                    }
+                                                }
+                                                else if (suggestion.IsAccepted is false)
+                                                {
+                                                    <a class="btn btn-reject mr-1 disabled"><i class="fas fa-trash ms-1"></i>رد شده</a>
+                                                }
+                                                else if (suggestion.IsDeleted is true)
+                                                {
+                                                    <a href="" class="btn btn-aprd mr-1 disabled"><i class="fas fa-check-circle ms-1"></i>تایید</a>
+                                                    <a class="btn btn-reject mr-1 disabled"><i class="fas fa-trash ms-1"></i>رد کردن</a>
+                                                }
+                                                else
+                                                {
+                                                    <form method="post" asp-page-handler="Accept">
+                                                        <input asp-for="@Model.ConfirmedProposal.ProposalId" type="hidden" value="@suggestion.Id" />
+                                                        <input asp-for="@Model.ConfirmedProposal.ServiceRequestId" type="hidden" value="@suggestion.ServiceRequestId" />
+                                                        @* <input type="hidden" asp-for="@Model.ServiceRequestNewStatus.NewStatus" value="@ServiceRequestStatus.WaitingForExpert" />
+                                                <input type="hidden" asp-for="@Model.ServiceRequestNewStatus.ServiceRequestId" value="@suggestion.ServiceRequestId" /> *@
+                                                        <input type="hidden" value="@suggestion.Id" name="proposalId" />
+                                                        <button type="submit" class="btn btn-aprd mr-1"><i class="fas fa-check-circle ms-1"></i>تایید</button>
+                                                    </form>
+                                                    <form asp-page-handler="Reject">
+                                                        <input name="proposalId" type="hidden" value="@suggestion.Id" />
+                                                        <button type="submit" class="btn btn-reject mr-1"><i class="fas fa-trash ms-1"></i>رد کردن</button>
+                                                    </form>
                                                 }
                                             </div>
-                                           
-
-
                                         </div>
                                     </div>
-                                    </form>
+                                    @* </form> *@
                                 }
 
                             </div>
@@ -122,34 +148,3 @@
     </div>
 
 </div>
-<!-- ======================= dashboard Detail End ======================== -->
-
-<script>
-    function setExpertId(expertId) {
-        document.getElementById('expertId').value = expertId;
-    }
-
-    function submitComment() {
-        var expertId = document.getElementById('expertId').value;
-        var commentText = document.getElementById('commentText').value;
-
-        fetch('/Comment/AddComment', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                expertId: expertId,
-                commentText: commentText
-            })
-        }).then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert('کامنت با موفقیت ثبت شد!');
-                location.reload();
-            } else {
-                alert('خطایی رخ داده است!');
-            }
-        });
-    }
-</script>
