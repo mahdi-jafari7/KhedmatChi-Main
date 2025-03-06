@@ -34,7 +34,7 @@
                                 @foreach (var suggestion in Model.Suggestions)
                                 {
                                     <!-- Single booking List -->
-                                    @* <form method="post"> *@
+                                    <form method="post">
                                     <div class="dsd-single-bookings-wraps">
                                         <div class="dsd-single-book-thumb"><a asp-page="Comment" asp-route-expertId="@suggestion.ExpertId" asp-route-requestStatus="@suggestion.ServiceRequestStatus" asp-route-serviceRequestId="@suggestion.ServiceRequestId"><img src="@suggestion.ExpertProfileImage" class="img-fluid circle" alt="" /></a></div>
                                         <div class="dsd-single-book-caption">
@@ -95,39 +95,20 @@
                                                         <ul>
                                                             <li>
                                                                 <div class="px-2 py-1 medium bg-light-warning rounded text-warning">
-                                                                    شما اکنون می‌توانید برای این کارشناس کامنت ارسال کنید
+                                                                    شما اکنون می‌توانید با کلیک روی تصویر پروفایل کارشناس، کامنت خود را ارسال کنید
                                                                 </div>
-                                                                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#commentModal" onclick="setExpertId(@suggestion.ExpertId)">ثبت کامنت</button>
+                                                                
                                                             </li>
                                                         </ul>
                                                     }
                                                 }
                                             </div>
-                                            <!-- مودال ثبت کامنت -->
-                                            <div class="modal" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" data-bs-backdrop="false">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="commentModalLabel">ثبت کامنت</h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <form id="commentForm">
-                                                                <input type="hidden" id="expertId" name="expertId" />
-                                                                <div class="mb-3">
-                                                                    <label for="commentText" class="form-label">متن کامنت</label>
-                                                                    <textarea class="form-control" id="commentText" name="commentText" rows="3"></textarea>
-                                                                </div>
-                                                                <button type="button" class="btn btn-success" onclick="submitComment()">ارسال کامنت</button>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                           
+
 
                                         </div>
                                     </div>
-                                    @* </form> *@
+                                    </form>
                                 }
 
                             </div>

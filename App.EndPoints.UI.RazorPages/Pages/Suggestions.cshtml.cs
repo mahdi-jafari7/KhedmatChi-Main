@@ -13,12 +13,15 @@ namespace App.EndPoints.UI.RazorPages.Pages
     {
         private readonly IProposalAppService _proposalAppService;
         private readonly IServiceRequestAppService _serviceRequestAppService;
-
+        private readonly ICommentAppService _commentAppService;
         public SuggestionsModel(IProposalAppService proposalAppService,
-            IServiceRequestAppService serviceRequestAppService)
+            IServiceRequestAppService serviceRequestAppService,
+            ICommentAppService commentAppService)
         {
             _proposalAppService = proposalAppService;
             _serviceRequestAppService = serviceRequestAppService;
+            _commentAppService = commentAppService;
+
         }
 
         [BindProperty]
@@ -57,6 +60,13 @@ namespace App.EndPoints.UI.RazorPages.Pages
         {
             await _serviceRequestAppService.ServiceRequestDoneUnSuccessfully(ServiceRequestProposalIds, cancellationToken);
             return LocalRedirect("~/MyRequests");
+        }
+
+        public async Task<IActionResult> OnPostComment(CommentDto commentDto,CancellationToken cancellationToken)
+        {
+            await _commentAppService.CreateComment(commentDto, cancellationToken);
+            return LocalRedirect("~/MyRequests");
+
         }
     }
 }
