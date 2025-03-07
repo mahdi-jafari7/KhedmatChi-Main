@@ -1,0 +1,68 @@
+﻿@page
+@using Framework;
+@using App.Domain.Core.Expert.Enums;
+@model App.EndPoints.UI.RazorPages.Areas.Admin.Pages.Proposal.IndexModel
+
+@{
+    Layout = "Shared/_AdminLayout";
+}
+
+<div class="table-responsive text-nowrap">
+    <table class="table card-table">
+        <thead>
+            <tr>
+                <th>ردیف</th>
+                <th>نام کارشناس</th>
+                <th>توضیحات کارشناس</th>
+                <th>نام مشتری</th>
+                <th>توضیحات مشتری</th>
+                <th>وضعیت‌ کلی</th>
+                <th>عمل‌ها</th>
+            </tr>
+        </thead>
+        <tbody class="table-border-bottom-0">
+            @foreach (var proposal in Model.ProposalDto)
+            {
+                <tr>
+                    <td><strong>@proposal.Id</strong></td>
+                    <td><strong>@proposal.ExpertLastName</strong></td>
+                    <td>
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-offset="0,8" data-bs-placement="top" data-bs-custom-class="tooltip-secondary" data-bs-original-title="@proposal.ExpertDescription">
+                            مشاهده متن درخواست
+                        </button>
+                    </td>
+                    <td><strong>@proposal.CustomerLastName</strong></td>
+                    <td>
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-offset="0,8" data-bs-placement="top" data-bs-custom-class="tooltip-secondary" data-bs-original-title="@proposal.CustomerDescription">
+                            مشاهده متن درخواست
+                        </button>
+                    </td>
+                    <td><strong>@proposal.ProposalStatus</strong></td>
+                    
+                    
+                    
+                    <td>
+                        @if (proposal.IsDeleted == false)
+                        {
+                            <span class="badge bg-label-primary me-1">فعال</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-label-danger me-1">غیرفعال</span>
+                        }
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bx bx-dots-vertical-rounded"></i>
+                            </button>
+                            <div class="dropdown-menu" style="">
+                                <a asp-page-handler="Delete" asp-route-id="@proposal.Id" class="dropdown-item"> <i class="bx bx-trash me-1"></i>غیرفعال کردن</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -26,5 +26,6 @@ namespace App.Domain.Core.Customer.Entities
         public int ServiceId { get; set; }
         public Service Service { get; set; }
         public List<Proposal> Proposals { get; set; }
+        public string? RequestImageUrl { get; set; }
     }
 }

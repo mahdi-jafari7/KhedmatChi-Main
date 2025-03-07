@@ -72,12 +72,12 @@ namespace App.Infra.Data.Repos.Ef.Customer
                     {
                         SlidingExpiration = TimeSpan.FromSeconds(1)
                     });
-                    _logger.LogInformation("customerDto returned from database, and cached in memory successfully.");
+                    _logger.LogInformation("کاستومر دی تی او با موفقییت از دیتابیس پر شد و در حافظه کش شد");
                     return customer;
                 }
                 else
                 {
-                    _logger.LogError("We expected the customerDto to return from the database, but it returned null.");
+                    _logger.LogError("کاستومر دی تی او از دیتابیس برنگشت و نال رفرنس داد");
                     throw new Exception("Something wents wrong!, please try again.");
                 }
             }
@@ -113,6 +113,7 @@ namespace App.Infra.Data.Repos.Ef.Customer
                     FirstName = c.FirstName,
                     LastName = c.LastName,
                     ProfileImage = c.ProfileImage,
+                    Email = c.ApplicationUser.Email
                 }).ToListAsync(cancellationToken);
 
                 if (customers is null)

@@ -1,4 +1,4 @@
-using App.Domain.AppServices.Admin;
+﻿using App.Domain.AppServices.Admin;
 using App.Domain.AppServices.Customer;
 using App.Domain.AppServices.Expert;
 using App.Domain.Core.Admin.AppServices;
@@ -152,16 +152,13 @@ var siteSettings = configuration.GetSection(nameof(SiteSettings)).Get<SiteSettin
 
 builder.Services.AddSingleton(siteSettings);
 
-builder.Host.ConfigureLogging(loggingBuilder =>
-{
-loggingBuilder.ClearProviders();
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console() // نمایش لاگ‌ها در کنسول
+    .WriteTo.Seq("http://localhost:5341") // ذخیره لاگ در Seq
+    .Enrich.FromLogContext()
+    .CreateLogger();
 
-}).UseSerilog((context, config) =>
-//builder.Logging.ClearProviders().UseSerilog((context, config) =>
-{
-    config.WriteTo.Console();
-    config.WriteTo.Seq(siteSettings.LogConfiguration.SeqAddress, LogEventLevel.Information, apiKey: siteSettings.LogConfiguration.SeqApiKey);
-});
+builder.Host.UseSerilog();
 
 builder.Services.AddDbContext<HomeServiceDbContext>(options
     => options.UseSqlServer(siteSettings.SqlConfiguration.ConnectionsString));
@@ -180,7 +177,7 @@ app.CustomExceptionHandlingMiddleware();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseSerilogRequestLogging();
 app.UseRouting();
 
 app.UseAuthentication();

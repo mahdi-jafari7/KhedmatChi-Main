@@ -23,6 +23,20 @@
                 </div>
 
             </div>
+            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 order-xl-last order-lg-last order-md-last">
+                <div class="d-flex bg-white rounded px-3 py-3 mb-3">
+                    <div class="dash-figure">
+                        <input type="hidden"  asp-for="@Model.ServiceRequest.ServiceImageUrl" />
+                        <div class="dash-figure-thumb"><img src="@Model.ServiceRequest.ServiceImageUrl" class="img-fluid rounded" alt="" /></div>
+                        <div class="upload-photo-btn">
+                            <div class="Uploadphoto">
+                                <span><i class="fas fa-upload"></i> آپلود تصویر</span>
+                                <input asp-for="@Model.RequestImage" type="file" class="upload">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!-- Sidebar -->
             <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">

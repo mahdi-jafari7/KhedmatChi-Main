@@ -1,5 +1,7 @@
 ﻿using App.Domain.Core.Admin.AppServices;
 using App.Domain.Core.Admin.Services;
+using App.Domain.Core.Customer.AppServices;
+using App.Domain.Core.Customer.DTOs;
 using App.Domain.Core.Expert.AppServices;
 using App.Domain.Core.Expert.DTOs;
 using Microsoft.AspNetCore.Authorization;
@@ -38,8 +40,10 @@ namespace App.EndPoints.UI.RazorPages.Areas.Admin.Pages.Category
             if (!ModelState.IsValid)
             {
                 return Page();
-                //return RedirectToAction("OnGet", new { expertId = (int)TempData["ExpertId"] });
+                
             }
+      
+           
 
             if (categoryImage is not null)
             {
@@ -47,7 +51,7 @@ namespace App.EndPoints.UI.RazorPages.Areas.Admin.Pages.Category
                 UpdatingCategory.Image = imageUrl;
             }
             await _categoryAppService.UpdateCategory(UpdatingCategory, cancellationToken);
-            return LocalRedirect("~/Admin/Category/Index");
+            return LocalRedirect("~/Admin/Customer/Index");
         }
     }
 }

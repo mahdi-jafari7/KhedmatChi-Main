@@ -1,0 +1,58 @@
+﻿@page
+@using App.Domain.AppServices.Expert
+@using App.Domain.Core.Expert.AppServices
+@inject IExpertAppService expertAppService
+@model App.EndPoints.UI.RazorPages.Areas.Admin.Pages.Expert.IndexModel
+@{
+    Layout = "Shared/_AdminLayout";
+}
+
+<a href="@Url.Page("Create")" type="button" class="btn rounded-pill btn-primary btn-medium">افزودن متخصص جدید</a>
+
+<div class="table-responsive text-nowrap">
+    <table class="table card-table">
+        <thead>
+            <tr>
+                <th>ردیف</th>
+                <th>نام</th>
+                <th>نام خانوادگی</th>
+                <th>تصویر</th>
+                <th>ایمیل</th>
+                <th>موجودی</th>
+            </tr>
+        </thead>
+        <tbody class="table-border-bottom-0">
+            @foreach (var expert in await expertAppService.GetExperts(default))
+            {
+                <tr>
+                    <td><strong>@expert.Id</strong></td>
+                    <td>@expert.FirstName</td>
+                    <td>@expert.LastName</td>
+                    <td>
+                        <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" aria-label="تونی استارک" data-bs-original-title="تونی استارک">
+                                <img src="@expert.ProfileImage" alt="آواتار" class="rounded-circle">
+                            </li>
+                        </ul>
+                    </td>
+                    <td>@expert.Email</td>
+                    <td>16</td> @* customer wallet *@
+
+
+                    <td>
+                        <div class="dropdown">
+                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bx bx-dots-vertical-rounded"></i>
+                            </button>
+                            <div class="dropdown-menu" style="">
+                                <a asp-page="Update" asp-route-id="@expert.Id" class="dropdown-item"><i class="bx bx-edit-alt me-1"></i> ویرایش</a>
+                                <a asp-page-handler="Delete" asp-route-id="@expert.Id" class="dropdown-item"> <i class="bx bx-trash me-1"></i> حذف متخصص</a>
+
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

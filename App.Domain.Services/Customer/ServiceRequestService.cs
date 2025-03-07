@@ -36,6 +36,7 @@ namespace App.Domain.Services.Customer
             creatingServiceRequest.CustomerId = serviceRequestDto.CustomerId;
             //creatingServiceRequest.ExpertId = serviceRequestDto.ExpertId;
             creatingServiceRequest.ServiceId = serviceRequestDto.ServiceId;
+            creatingServiceRequest.RequestImageUrl = serviceRequestDto.ServiceImageUrl;
             return await _serviceRequestRepository.CreateServiceRequest(creatingServiceRequest, cancellationToken);
         }
 

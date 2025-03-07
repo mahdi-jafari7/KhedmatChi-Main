@@ -1,0 +1,61 @@
+﻿@page
+@using App.Domain.Core.Customer.AppServices
+
+@model App.EndPoints.UI.RazorPages.Areas.Admin.Pages.Customer.CreateModel
+@inject ICustomerAppService customerAppService
+@{
+    Layout = "Shared/_AdminLayout";
+}
+
+<div class="card mb-4">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">ایجاد مشتری جدید</h5>
+        <small class="text-muted float-end primary-font"></small>
+    </div>
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+
+            <!-- نام -->
+            <div class="mb-3">
+                <label asp-for="@Model.CreatingCustomer.FirstName" class="form-label" for="basic-default-firstname">نام</label>
+                <input asp-for="@Model.CreatingCustomer.FirstName" type="text" class="form-control" id="basic-default-firstname" placeholder="نام خود را وارد کنید">
+                <span asp-validation-for="@Model.CreatingCustomer.FirstName" class="text-danger"></span>
+            </div>
+
+            <!-- نام خانوادگی -->
+            <div class="mb-3">
+                <label asp-for="@Model.CreatingCustomer.LastName" class="form-label" for="basic-default-lastname">نام خانوادگی</label>
+                <input asp-for="@Model.CreatingCustomer.LastName" type="text" class="form-control" id="basic-default-lastname" placeholder="نام خانوادگی خود را وارد کنید">
+                <span asp-validation-for="@Model.CreatingCustomer.LastName" class="text-danger"></span>
+            </div>
+
+            <!-- ایمیل -->
+            <div class="mb-3">
+                <label asp-for="@Model.CreatingCustomer.Email" class="form-label" for="basic-default-email">ایمیل</label>
+                <input asp-for="@Model.CreatingCustomer.Email" type="email" class="form-control" id="basic-default-email" placeholder="example@example.com">
+                <span asp-validation-for="@Model.CreatingCustomer.Email" class="text-danger"></span>
+            </div>
+
+            @* <!-- موجودی -->
+            <div class="mb-3">
+                <label asp-for="@Model.CreatingCustomer.Balance" class="form-label" for="basic-default-balance">موجودی</label>
+                <input asp-for="@Model.CreatingCustomer.Balance" type="number" class="form-control" id="basic-default-balance" placeholder="موجودی را وارد کنید">
+                <span asp-validation-for="@Model.CreatingCustomer.Balance" class="text-danger"></span>
+            </div> *@
+
+            <!-- تصویر -->
+            <div class="mb-3">
+                <label asp-for="@Model.CreatingCustomer.ProfileImage" class="form-label" for="basic-default-image">تصویر</label>
+                <input asp-for="@Model.CreatingCustomer.ProfileImage" type="file" class="form-control" id="basic-default-image">
+                <span asp-validation-for="@Model.CreatingCustomer.ProfileImage" class="text-danger"></span>
+            </div>
+
+            <!-- دکمه ارسال -->
+            <button type="submit" class="btn btn-primary">ارسال</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

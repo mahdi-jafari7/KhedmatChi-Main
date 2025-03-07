@@ -45,7 +45,7 @@ namespace App.EndPoints.UI.RazorPages.Pages
         [BindProperty]
         public ExpertProfileDto ExpertProfileDetails { get; set; }
         [BindProperty]
-        public IFormFile ProfileImage { get; set; }
+        public IFormFile ProfileImage { get; set; } 
         public List<ProvinceDto> Provinces { get; set; }
         public List<CityDto> Cities { get; set; }
         public List<ServiceDto> Services { get; set; }
@@ -112,6 +112,7 @@ namespace App.EndPoints.UI.RazorPages.Pages
                     var imageUrl = await _baseAppService.UploadImage(profileImage);
                     ExpertProfileDetails.ProfileImageUrl = imageUrl;
                 }
+                
                 
                 await _expertAppService.UpdateExpert(ExpertProfileDetails, cancellationToken);
                 return LocalRedirect("~/Profile");
