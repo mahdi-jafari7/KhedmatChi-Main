@@ -11,9 +11,9 @@ namespace App.EndPoints.UI.RazorPages.Areas.Admin.Pages.Proposal
     {
         private readonly IProposalAppService _proposalAppService;
 
-        public IndexModel(IProposalAppService _proposalAppService)
+        public IndexModel(IProposalAppService proposalAppService)
         {
-            _proposalAppService = _proposalAppService;
+            _proposalAppService = proposalAppService;
         }
 
         [BindProperty]
@@ -26,12 +26,12 @@ namespace App.EndPoints.UI.RazorPages.Areas.Admin.Pages.Proposal
         }
 
 
-        public async Task<IActionResult> OnGetDelete(int id, CancellationToken cancellationToken)
+        public async Task<IActionResult> OnPostDelete(int id, CancellationToken cancellationToken)
         {
             await _proposalAppService.SoftDeleteProposal(id, cancellationToken);
             return RedirectToPage();
         }
 
-        
+
     }
 }

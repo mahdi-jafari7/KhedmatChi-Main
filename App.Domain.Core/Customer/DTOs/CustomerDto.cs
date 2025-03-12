@@ -21,6 +21,6 @@ namespace App.Domain.Core.Customer.DTOs
         public string? TwitterAddress { get; set; }
         public string? InstagramAddress { get; set; }
         public string? LinkedinAddress { get; set; }
-        public Address Address { get; set; }
+        public Address? Address { get; set; }
     }
 }

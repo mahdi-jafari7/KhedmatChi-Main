@@ -15,6 +15,8 @@
     <div class="card-body">
         <form method="post" enctype="multipart/form-data">
 
+            <input type="hidden" asp-for="@Model.CreatingCustomer.Id" />
+
             <!-- نام -->
             <div class="mb-3">
                 <label asp-for="@Model.CreatingCustomer.FirstName" class="form-label" for="basic-default-firstname">نام</label>
@@ -45,9 +47,10 @@
 
             <!-- تصویر -->
             <div class="mb-3">
-                <label asp-for="@Model.CreatingCustomer.ProfileImage" class="form-label" for="basic-default-image">تصویر</label>
-                <input asp-for="@Model.CreatingCustomer.ProfileImage" type="file" class="form-control" id="basic-default-image">
-                <span asp-validation-for="@Model.CreatingCustomer.ProfileImage" class="text-danger"></span>
+                <label asp-for="@Model.CreatingCustomer.ProfileImage" class="form-label">عکس مشتری را انتخاب کنید</label>
+                <input asp-for="@Model.CustomerImage" class="form-control" type="file">
+                <span asp-validation-for="@Model.CustomerImage" class="text-danger"></span>
+
             </div>
 
             <!-- دکمه ارسال -->

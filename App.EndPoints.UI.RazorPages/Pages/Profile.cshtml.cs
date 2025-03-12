@@ -57,7 +57,7 @@ namespace App.EndPoints.UI.RazorPages.Pages
             Services = await _serviceAppService.GetServices(cancellationToken);
 
             var applicationUserId = int.Parse(User.Claims.First().Value);
-
+            
             if (User.IsInRole("Customer"))
             {
                 int? userId;

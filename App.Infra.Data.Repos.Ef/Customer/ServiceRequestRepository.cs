@@ -65,6 +65,8 @@ namespace App.Infra.Data.Repos.Ef.Customer
                     Status = sr.Status,
                     Price = sr.CustomerSuggestedPrice,
                     IsDone = sr.IsDone,
+                    ServiceImageUrl = sr.RequestImageUrl,
+                    
                 }).FirstOrDefaultAsync(sr => sr.Id == serviceRequestId, cancellationToken);
 
                 if (serviceRequest != null)

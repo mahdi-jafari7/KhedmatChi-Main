@@ -1,4 +1,4 @@
-using App.Domain.AppServices.Customer;
+﻿using App.Domain.AppServices.Customer;
 using App.Domain.Core.Admin.AppServices;
 using App.Domain.Core.Customer.AppServices;
 using App.Domain.Core.Customer.DTOs;
@@ -14,8 +14,8 @@ namespace App.EndPoints.UI.RazorPages.Pages
     //[Authorize(Roles = "Customer")]
     public class RequestModel : PageModel
     {
-		private readonly IServiceAppService _serviceAppService;
-		private readonly IServiceRequestAppService _serviceRequestAppService;
+        private readonly IServiceAppService _serviceAppService;
+        private readonly IServiceRequestAppService _serviceRequestAppService;
         private readonly ICustomerAppService _customerAppService;
         private readonly IBaseAppService _baseAppService;
 
@@ -25,8 +25,8 @@ namespace App.EndPoints.UI.RazorPages.Pages
             ICustomerAppService customerAppService,
             IBaseAppService baseAppService)
         {
-			_serviceAppService = serviceAppService;
-			_serviceRequestAppService = serviceRequestAppService;
+            _serviceAppService = serviceAppService;
+            _serviceRequestAppService = serviceRequestAppService;
             _customerAppService = customerAppService;
             _baseAppService = baseAppService;
         }
@@ -34,45 +34,86 @@ namespace App.EndPoints.UI.RazorPages.Pages
         [BindProperty]
         public ServiceRequestDto ServiceRequest { get; set; }
         public ServiceDto SelectedService { get; set; }
-
         [BindProperty]
-        public IFormFile RequestImage { get; set; }
+        public IFormFile? ServiceRequestImage { get; set; }
 
-        public async Task OnGet(int serviceId, CancellationToken cancellationToken)
+
+        public async Task OnGet(int? serviceId, CancellationToken cancellationToken)
         {
-            SelectedService = await _serviceAppService.GetServiceById(serviceId, cancellationToken);
-            
+            if (serviceId == null)
+            {
+                ModelState.AddModelError("", "شناسه سرویس نامعتبر است.");
+                return;
+            }
+
+            SelectedService = await _serviceAppService.GetServiceById(serviceId.Value, cancellationToken);
+            ServiceRequest = new ServiceRequestDto { ServiceId = serviceId.Value };
         }
 
-        public async Task<IActionResult> OnPostAsync(IFormFile ServiceRequestImage,CancellationToken cancellationToken)
-        {
-            if (!ModelState.IsValid)
-            {
-                return RedirectToAction("OnGet", new { serviceId = ServiceRequest.ServiceId });
-                //return RedirectToAction("OnGet", new { expertId = (int)TempData["ExpertId"] });
-            }
-            var applicationUserId = int.Parse(User.Claims.First().Value);
-            int? userId;
+        //public async Task<IActionResult> OnPostAsync(IFormFile ServiceRequestImage, CancellationToken cancellationToken)
+        //{
+        //    if (User.IsInRole("Customer"))
+        //    {
+        //        if (!ModelState.IsValid)
+        //        {
+        //            return RedirectToAction("OnGet", new { serviceId = ServiceRequest.ServiceId });
 
-            var user = User.Claims.FirstOrDefault(c => c.Type == "userCustomerId");
-            if (user is not null)
+        //        }
+        //        var applicationUserId = int.Parse(User.Claims.First().Value);
+        //        int? userId;
+
+        //        var user = User.Claims.FirstOrDefault(c => c.Type == "userCustomerId");
+        //        if (user is not null)
+        //        {
+        //            userId = int.Parse(user.Value);
+        //        }
+        //        else
+        //        {
+        //            userId = await _customerAppService.GetCustomerIdByApplicationUserId(applicationUserId, cancellationToken);
+        //        }
+
+
+
+        //        ServiceRequest.CustomerId = userId.Value;
+        //        await _serviceRequestAppService.CreateServiceRequest(ServiceRequest, cancellationToken);
+        //    }
+        //    return LocalRedirect("~/MyRequests");
+
+        //}
+
+        public async Task<IActionResult> OnPostAsync([FromForm] IFormFile ServiceRequestImage, CancellationToken cancellationToken)
+        {
+            if (ServiceRequest == null)
             {
-                userId = int.Parse(user.Value);
+                ServiceRequest = new ServiceRequestDto();
             }
-            else
-            {
-                userId = await _customerAppService.GetCustomerIdByApplicationUserId(applicationUserId, cancellationToken);
-            }
-            if (ServiceRequestImage is not null)
+
+            if (ServiceRequestImage != null)
             {
                 var imageUrl = await _baseAppService.UploadImage(ServiceRequestImage);
                 ServiceRequest.ServiceImageUrl = imageUrl;
             }
-            
 
-            ServiceRequest.CustomerId = userId.Value;
-			await _serviceRequestAppService.CreateServiceRequest(ServiceRequest, cancellationToken);
+            if (User.IsInRole("Customer"))
+            {
+                if (!ModelState.IsValid)
+                {
+                    return RedirectToPage("Request", new { serviceId = ServiceRequest.ServiceId });
+                }
+
+                var applicationUserId = int.Parse(User.Claims.First().Value);
+                int? userId = User.Claims.FirstOrDefault(c => c.Type == "userCustomerId") is { } user
+                    ? int.Parse(user.Value)
+                    : await _customerAppService.GetCustomerIdByApplicationUserId(applicationUserId, cancellationToken);
+
+                ServiceRequest.CustomerId = userId.Value;
+
+                await _serviceRequestAppService.CreateServiceRequest(ServiceRequest, cancellationToken);
+            }
+
             return LocalRedirect("~/MyRequests");
         }
+
+
     }
 }

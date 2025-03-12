@@ -36,6 +36,7 @@ namespace App.Domain.Services.Customer
             signingUpCustomer.FirstName = customerDto.FirstName;
             signingUpCustomer.LastName = customerDto.LastName;
             signingUpCustomer.ProfileImage = customerDto.ProfileImage;
+            signingUpCustomer.Id = customerDto.Id;
             //signingUpCustomer.AdminId = customerDto.AdminId; //will fix later
             return await _customerRepository.CreateCustomer(signingUpCustomer, cancellationToken);
         }

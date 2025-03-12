@@ -6,80 +6,67 @@
 <section class="gray py-5 position-relative">
     <div class="container">
         <div class="row">
-
-            <!-- Main Content -->
             <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
-
-                <!-- About The Business -->
-                <div class="bg-white rounded mb-4">
-                    <div class="jbd-01 px-4 py-4">
-                        <div class="jbd-details">
-                            <h5 class="ft-bold fs-lg ff-second">@Model.SelectedService.Title</h5>
-                            <div class="d-block mt-3">
-                                <p>@Model.SelectedService.Description</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 order-xl-last order-lg-last order-md-last">
-                <div class="d-flex bg-white rounded px-3 py-3 mb-3">
-                    <div class="dash-figure">
-                        <input type="hidden"  asp-for="@Model.ServiceRequest.ServiceImageUrl" />
-                        <div class="dash-figure-thumb"><img src="@Model.ServiceRequest.ServiceImageUrl" class="img-fluid rounded" alt="" /></div>
-                        <div class="upload-photo-btn">
-                            <div class="Uploadphoto">
-                                <span><i class="fas fa-upload"></i> آپلود تصویر</span>
-                                <input asp-for="@Model.RequestImage" type="file" class="upload">
-                            </div>
-                        </div>
-                    </div>
+                <div class="bg-white rounded mb-4 p-4">
+                    <h5 class="ft-bold fs-lg">@Model.SelectedService.Title</h5>
+                    <p class="mt-3">@Model.SelectedService.Description</p>
                 </div>
             </div>
 
-            <!-- Sidebar -->
             <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                <div class="bg-white rounded p-4 shadow-lg">
+                    <h4 class="ft-bold mb-3 text-center">ثبت سفارش</h4>
 
-                <!-- Order Booking Form -->
-                @if (User.IsInRole("Customer"))
-                {
-                    <div class="jb-apply-form bg-white rounded py-4 px-4 box-static mb-4">
-                        <h4 class="ft-bold mb-1 ff-second fs-5">ثبت سفارش</h4>
+                    <form method="post" enctype="multipart/form-data">
+                        <input type="hidden" asp-for="ServiceRequest.ServiceId" value="@Model.SelectedService.Id" />
 
-                        <form class="_apply_form_form" method="post">
-                            <!-- Hidden Input for Service ID -->
-                            <input asp-for="@Model.ServiceRequest.ServiceId" type="hidden" value="@Model.SelectedService.Id" />
-
-                            <!-- Customer Description -->
-                            <div class="form-group">
-                                <label class="mb-1">توضیحات</label>
-                                <textarea asp-for="@Model.ServiceRequest.CustomerDescription" cols="40" rows="3" class="form-control with-light" placeholder="متن توضیحات..."></textarea>
-                                <span asp-validation-for="@Model.ServiceRequest.CustomerDescription" class="text-danger"></span>
+                        <!-- بخش آپلود تصویر -->
+                        <div class="text-center mb-3">
+                            <div class="dash-figure-thumb position-relative">
+                                <img id="previewImage" src="@(!string.IsNullOrEmpty(Model.ServiceRequest.ServiceImageUrl) ? Model.ServiceRequest.ServiceImageUrl : "/images/default-placeholder.png")" class="img-fluid rounded shadow-sm" alt="تصویر آپلود شده" />
+                                <input type="hidden" asp-for="ServiceRequest.ServiceImageUrl" />
                             </div>
+                            <label for="uploadImage" class="btn btn-outline-primary mt-2">
+                                <i class="fas fa-upload"></i> آپلود تصویر
+                            </label>
+                            <input id="uploadImage" asp-for="ServiceRequestImage" type="file" class="d-none" accept="image/*" />
+                        </div>
 
-                            <!-- Price Proposal -->
-                            <div class="form-group">
-                                <label class="mb-1">قیمت پیشنهادی</label>
-                                <input asp-for="@Model.ServiceRequest.Price" type="number" class="form-control rounded" placeholder="قیمت خود را وارد کنید" />
-                                <span asp-validation-for="@Model.ServiceRequest.Price" class="text-danger"></span>
-                            </div>
+                        <!-- توضیحات مشتری -->
+                        <div class="form-group">
+                            <label>توضیحات</label>
+                            <textarea asp-for="ServiceRequest.CustomerDescription" class="form-control" rows="3" placeholder="متن توضیحات..."></textarea>
+                            <span asp-validation-for="ServiceRequest.CustomerDescription" class="text-danger"></span>
+                        </div>
 
-                            <!-- Submit Button -->
-                            <div class="form-group mt-5">
-                                <button type="submit" class="btn btn-md rounded theme-bg text-light ft-medium fs-sm full-width">ثبت سفارش</button>
-                            </div>
-                        </form>
-                    </div>
-                }
+                        <!-- قیمت پیشنهادی -->
+                        <div class="form-group">
+                            <label>قیمت پیشنهادی</label>
+                            <input asp-for="ServiceRequest.Price" type="number" class="form-control rounded" placeholder="قیمت خود را وارد کنید" />
+                            <span asp-validation-for="ServiceRequest.Price" class="text-danger"></span>
+                        </div>
 
+                        <!-- دکمه ارسال -->
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-lg btn-primary w-100 shadow">📩 ثبت سفارش</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-
         </div>
     </div>
 </section>
 
-<!-- Include Validation Scripts -->
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        document.getElementById('uploadImage').addEventListener('change', function(event) {
+            let reader = new FileReader();
+            reader.onload = function() {
+                document.getElementById('previewImage').src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        });
+    </script>
 }

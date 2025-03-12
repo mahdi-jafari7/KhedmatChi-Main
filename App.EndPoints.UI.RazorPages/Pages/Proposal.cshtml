@@ -1,141 +1,103 @@
 ﻿@page
+@using App.Domain.Core.Customer.AppServices
 @model App.EndPoints.UI.RazorPages.Pages.ProposalModel
 @{
 }
+@inject ICustomerAppService _customerappservice
 
 <!-- ============================ Listing Details Start ================================== -->
 <section class="gray py-5 position-relative">
-	<div class="container">
-		<div class="row">
-			<div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
+                <!-- About The Business -->
+                <div class="bg-white rounded shadow-sm p-4 mb-4">
+                    <div class="jbd-details">
+                        <h5 class="fw-bold text-primary">@Model.ServiceRequest.ServiceName</h5>
 
-				<!-- About The Business -->
-				<div class="bg-white rounded mb-4">
-					<div class="jbd-01 px-4 py-4">
-						<div class="jbd-details">
-							<h5 class="ft-bold fs-lg ff-second">@Model.ServiceRequest.ServiceName</h5>
 
-							<div class="d-block mt-3">
-								<p>@Model.ServiceRequest.CustomerDescription</p>
-								@* <p class="p-0 m-0">در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.</p> *@
-							</div>
-						</div>
+                        @* <!-- customer information Section -->
+                        <div class="p-3 bg-light rounded mb-3 bg-warning">
+                            <h6 class="fw-bold text-secondary">نام مشتری:</h6>
+                            <p class="mt-2 text-muted">@_customerappservice.GetCustomerById(Model.ServiceRequest.CustomerId,default)</p>
+                           
 
-					</div>
-				</div>
+                        </div> *@
 
-				<!-- Frequently Asked Questions -->
-				<div class="d-block mb-2">
-					<div class="jbd-01 py-2">
-						<div class="jbd-details">
-							<h5 class="ft-bold fs-lg ff-second">سوالات متداول</h5>
+                        <!-- Description Section -->
+                        <div class="p-3 bg-light rounded mb-3">
+                            <h6 class="fw-bold text-secondary">توضیحات</h6>
+                            <p class="mt-2 text-muted">@Model.ServiceRequest.CustomerDescription</p>
+                        </div>
 
-							<div class="d-block mt-3">
-								<div id="accordion2" class="accordion">
-									<div class="card">
-										<div class="card-header" id="h7">
-											<h5 class="mb-0">
-												<button class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#ord7" aria-expanded="true" aria-controls="ord7">
-													آیا می توانم لیست GoodUP را به صورت رایگان دریافت کنم؟
-												</button>
-											</h5>
-										</div>
+                        <!-- Price Section -->
+                        <div class="p-3 bg-light rounded mb-3 bg-warning">
+                            <h6 class="fw-bold text-secondary">قیمت تعیین شده توسط مشتری:</h6>
+                            <p class="mt-2 text-muted">@Model.ServiceRequest.Price</p>
 
-										<div id="ord7" class="collapse show" aria-labelledby="h7" data-parent="#accordion2">
-											<div class="card-body">
-												لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد.
-											</div>
-										</div>
-									</div>
-									<div class="card">
-										<div class="card-header" id="h8">
-											<h5 class="mb-0">
-												<button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#ord8" aria-expanded="false" aria-controls="ord8">
-													چگونه فایل ها را برای همیشه از ویندوز پاک کنیم؟
-												</button>
-											</h5>
-										</div>
-										<div id="ord8" class="collapse" aria-labelledby="h8" data-parent="#accordion2">
-											<div class="card-body">
-												لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد.
-											</div>
-										</div>
-									</div>
-									<div class="card">
-										<div class="card-header" id="h9">
-											<h5 class="mb-0">
-												<button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#ord9" aria-expanded="false" aria-controls="ord9">
-													آیا می توانم لیست GoodUP را به صورت رایگان دریافت کنم؟
-												</button>
-											</h5>
-										</div>
-										<div id="ord9" class="collapse" aria-labelledby="h9" data-parent="#accordion2">
-											<div class="card-body">
-												لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد.
-											</div>
-										</div>
-									</div>
-									<div class="card">
-										<div class="card-header" id="h4">
-											<h5 class="mb-0">
-												<button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#ord4" aria-expanded="false" aria-controls="ord4">
-													برای GoodUp کدام مجوز برای اهداف تجاری بهتر است؟
-												</button>
-											</h5>
-										</div>
+                        </div>
 
-										<div id="ord4" class="collapse" aria-labelledby="h4" data-parent="#accordion2">
-											<div class="card-body">
-												لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد.
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+                        <!-- Image Section -->
+                        @if (!string.IsNullOrEmpty(Model.ServiceRequest.ServiceImageUrl))
+                        {
+                            <div class="text-center p-3 bg-white rounded shadow-sm mb-3">
+                                <h6 class="fw-bold text-secondary">تصویر ارسالی توسط مشتری</h6>
+                                <img id="serviceImage" src="@Model.ServiceRequest.ServiceImageUrl" class="img-fluid rounded shadow-lg mt-2" alt="Customer Image" style="max-width: 100%; cursor: pointer;">
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
 
-					</div>
-				</div>
+            <!-- Sidebar -->
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                <!-- Proposal Form -->
+                <div class="bg-white rounded shadow-sm p-4 mb-4">
+                    <h4 class="fw-bold text-dark mb-3">محل توضیحات شما</h4>
+                    <form asp-page-handler="SendProposal" method="post">
+                        <input asp-for="@Model.Proposal.ServiceRequestId" type="hidden" value="@Model.ServiceRequest.Id" />
 
-			</div>
+                        <div class="mb-3">
+                            <textarea asp-for="@Model.Proposal.ExpertDescription" class="form-control" rows="3" placeholder="متن توضیحات..."></textarea>
+                            <span asp-validation-for="@Model.Proposal.ExpertDescription" class="text-danger"></span>
+                        </div>
 
-			<!-- Sidebar -->
-			<div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                        <!-- Price Section -->
+                        <div class="mb-3 p-3 bg-light rounded">
+                            <label class="form-label fw-bold">قیمت پیشنهادی</label>
+                            <input asp-for="@Model.Proposal.ExpertSuggestedPrice" type="number" class="form-control" placeholder="مثلاً 100000 تومان" />
+                            <span asp-validation-for="@Model.Proposal.ExpertSuggestedPrice" class="text-danger"></span>
+                        </div>
 
-				<!-- order Booking -->
-				<div class="jb-apply-form bg-white rounded py-4 px-4 box-static mb-4">
-					<h4 class="ft-bold mb-1 ff-second fs-5">محل توضیحات شما</h4>
-
-					<form class="_apply_form_form" asp-page-handler="SendProposal" method="post">
-						<div class="Goodup-09kjh">
-							<input asp-for="@Model.Proposal.ServiceRequestId" type="hidden" value="@Model.ServiceRequest.Id" />
-							<ul>
-								<textarea asp-for="@Model.Proposal.ExpertDescription" cols="40" rows="3" class="form-control with-light" placeholder="متن توضیحات..."></textarea>
-								<span asp-validation-for="@Model.Proposal.ExpertDescription" class="text-danger"></span>
-							</ul>
-						</div>
-
-						<div class="form-group">
-							<label class="mb-1">قیمت پیشنهادی</label>
-							<input asp-for="@Model.Proposal.ExpertSuggestedPrice" type="number" class="form-control rounded" placeholder="" />
-							<span asp-validation-for="@Model.Proposal.ExpertSuggestedPrice" class="text-danger"></span>
-
-						</div>
-
-						<div class="form-group mt-5">
-							<button type="submit" class="btn btn-md rounded theme-bg text-light ft-medium fs-sm full-width">ثبت پیشنهاد</button>
-						</div>
-					</form>
-
-				</div>
-
-			</div>
-
-		</div>
-	</div>
+                        <button type="submit" class="btn btn-primary w-100">ثبت پیشنهاد</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
-<!-- ============================ Listing Details End ================================== -->
-@section Scripts {
 
-	<partial name="_ValidationScriptsPartial" />
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const image = document.getElementById("serviceImage");
+            if (image) {
+                image.addEventListener("click", function() {
+                    const modal = document.createElement("div");
+                    modal.innerHTML = `
+                        <div class="modal fade show d-block" tabindex="-1" role="dialog" style="background: rgba(0, 0, 0, 0.8);">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content p-3 text-center">
+                                    <img src="${image.src}" class="img-fluid rounded" alt="Customer Image">
+                                    <button class="btn btn-danger mt-3" onclick="this.parentElement.parentElement.parentElement.remove()">بستن</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    document.body.appendChild(modal);
+                });
+            }
+        });
+    </script>
 }
