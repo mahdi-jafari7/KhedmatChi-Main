@@ -15,7 +15,7 @@ namespace App.Domain.Core.Contract.Repository_Interfaces
         public Task<MainCategorySoftDeleteDTO> SoftDeleteCategory(int MaincategoryId, CancellationToken cancellationToken);
         //public Task<Expert.Entities.Category> HardDeleteCategory(int categoryId, CancellationToken cancellationToken);
         public Task<MainCategoryDTO> GetMainCategoryById(int MaincategoryId, CancellationToken cancellationToken);
-        public Task<List<MainCategoryDTO>> GetMainCategories(CancellationToken cancellationToken);
+        //public Task<List<MainCategoryDTO>> GetMainCategories(CancellationToken cancellationToken);
         public Task<List<MainCategoryDTO>> GetMainCategoriesWithCategories(CancellationToken cancellationToken);
 
         public Task<bool> RestoreDeletedMainCategory(int MaincategoryId, CancellationToken cancellationToken);

@@ -86,6 +86,7 @@ builder.Services.AddScoped<IServiceRequestAppService, ServiceRequestAppService>(
 builder.Services.AddScoped<IMainCategoryRepository,MainCategoryRepository>();
 builder.Services.AddScoped<IMainCategoryService,MainCategoryService>();
 builder.Services.AddScoped<IMainCategoryAppService,MainCategoryAppService>();
+builder.Services.AddScoped<IMainCategoryRepoDapper, MainCategoryRepoDapper>();
 #endregion
 
 #region CategoryDI

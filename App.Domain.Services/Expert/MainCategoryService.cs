@@ -1,4 +1,5 @@
-﻿using App.Domain.Core.Contract.Repository_Interfaces;
+﻿using App.Domain.Core.Contract.Dapper_Repositories_Interfaces;
+using App.Domain.Core.Contract.Repository_Interfaces;
 using App.Domain.Core.Contract.Service_Interfaces;
 using App.Domain.Core.Expert.Data;
 using App.Domain.Core.Expert.DTOs;
@@ -16,12 +17,14 @@ namespace App.Domain.Services.Expert
 
         #region Fields
         private readonly IMainCategoryRepository _MaincategoryRepository;
+        private readonly IMainCategoryRepoDapper _mainCategoryRepoDapper;
         #endregion
 
         #region Ctors
-        public MainCategoryService(IMainCategoryRepository maincategoryRepository)
+        public MainCategoryService(IMainCategoryRepository maincategoryRepository,IMainCategoryRepoDapper mainCategoryRepoDapper)
         {
             _MaincategoryRepository = maincategoryRepository;
+            _mainCategoryRepoDapper = mainCategoryRepoDapper;
         }
         #endregion
 
@@ -37,7 +40,7 @@ namespace App.Domain.Services.Expert
         }
 
         public async Task<List<MainCategoryDTO>> GetMainCategories(CancellationToken cancellationToken)
-            => await _MaincategoryRepository.GetMainCategories(cancellationToken);
+            => await _mainCategoryRepoDapper.GetMainCategories(cancellationToken);
 
         public async Task<List<MainCategoryDTO>> GetMainCategoriesWithCategories(CancellationToken cancellationToken)
             => await _MaincategoryRepository.GetMainCategoriesWithCategories(cancellationToken);
