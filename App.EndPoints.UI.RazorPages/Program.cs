@@ -93,6 +93,7 @@ builder.Services.AddScoped<IMainCategoryRepoDapper, MainCategoryRepoDapper>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICategoryAppService, CategoryAppService>();
+builder.Services.AddScoped<ICategoryRepoDapper, CategoriesRepoDapper>();
 #endregion
 
 #region ExpertDI

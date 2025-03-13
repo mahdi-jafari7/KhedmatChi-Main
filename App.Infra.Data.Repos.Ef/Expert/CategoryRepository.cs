@@ -48,41 +48,41 @@ namespace App.Infra.Data.Repos.Ef.Expert
             return createdCategory;
         }
 
-        public async Task<List<CategoryDto>> GetCategories(CancellationToken cancellationToken)
-        {
-            var categories = _memoryCache.Get<List<CategoryDto>>("categoryDtos");
+        //public async Task<List<CategoryDto>> GetCategories(CancellationToken cancellationToken)
+        //{
+        //    var categories = _memoryCache.Get<List<CategoryDto>>("categoryDtos");
 
-            if (categories is null)
-            {
-                categories = await _homeServiceDbContext.Categories
-                    .Where(c => c.IsDeleted == false)
-                .Select(a => new CategoryDto()
-                {
-                    Id = a.Id,
-                    Title = a.Title,
-                    Description = a.Description,
-                    IsDeleted = a.IsDeleted,
-                    Image = a.Image
-                }).ToListAsync(cancellationToken);
+        //    if (categories is null)
+        //    {
+        //        categories = await _homeServiceDbContext.Categories
+        //            .Where(c => c.IsDeleted == false)
+        //        .Select(a => new CategoryDto()
+        //        {
+        //            Id = a.Id,
+        //            Title = a.Title,
+        //            Description = a.Description,
+        //            IsDeleted = a.IsDeleted,
+        //            Image = a.Image
+        //        }).ToListAsync(cancellationToken);
 
-                if (categories is null)
-                {
-                    _logger.LogError("We expected the AdminProfileDtos to return from the database, but it returned null.");
-                    throw new Exception("Something wents wrong!, please try again.");
-                }
-                else
-                {
-                    _memoryCache.Set("categoryDtos", categories, new MemoryCacheEntryOptions()
-                    {
-                        SlidingExpiration = TimeSpan.FromSeconds(120)
-                    });
-                    _logger.LogInformation("categoryDtos returned from database, and cached in memory successfully.");
-                    return categories;
-                }
-            }
-            _logger.LogInformation("categoryDtos returned from InMemoryCache.");
-            return categories;
-        }
+        //        if (categories is null)
+        //        {
+        //            _logger.LogError("We expected the AdminProfileDtos to return from the database, but it returned null.");
+        //            throw new Exception("Something wents wrong!, please try again.");
+        //        }
+        //        else
+        //        {
+        //            _memoryCache.Set("categoryDtos", categories, new MemoryCacheEntryOptions()
+        //            {
+        //                SlidingExpiration = TimeSpan.FromSeconds(120)
+        //            });
+        //            _logger.LogInformation("categoryDtos returned from database, and cached in memory successfully.");
+        //            return categories;
+        //        }
+        //    }
+        //    _logger.LogInformation("categoryDtos returned from InMemoryCache.");
+        //    return categories;
+        //}
 
         public async Task<List<CategoryDto>> GetCategoriesWithServices(CancellationToken cancellationToken)
         {
