@@ -13,6 +13,6 @@ namespace App.Domain.Core.Customer.Data
         public Task<Customer.DTOs.CitySoftDeleteDto> SoftDeleteCity(int cityId, CancellationToken cancellationToken);
         //public Task<Customer.Entities.City> HardDeleteCity(int cityId, CancellationToken cancellationToken);
         public Task<Customer.DTOs.CityDto> GetCityById(int cityId, CancellationToken cancellationToken);
-        public Task<List<Customer.DTOs.CityDto>> GetCities(CancellationToken cancellationToken);
+        //public Task<List<Customer.DTOs.CityDto>> GetCities(CancellationToken cancellationToken);
     }
 }

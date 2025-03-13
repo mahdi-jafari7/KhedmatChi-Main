@@ -37,6 +37,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework", "Framework\Fram
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.EndPoints.Api", "App.EndPoints.Api\App.EndPoints.Api.csproj", "{9F4AEAF1-ED27-4852-AACC-1918C2266775}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dapper", "Dapper", "{6EA7CC12-8112-42FD-9A51-AAF4BBF2EBA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Infra.Data.Repos.Dapper", "App.Infra.Data.Repos.Dapper\App.Infra.Data.Repos.Dapper.csproj", "{2708C2DC-F14E-4152-B869-AF511DE7D969}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +79,10 @@ Global
 		{9F4AEAF1-ED27-4852-AACC-1918C2266775}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F4AEAF1-ED27-4852-AACC-1918C2266775}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F4AEAF1-ED27-4852-AACC-1918C2266775}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2708C2DC-F14E-4152-B869-AF511DE7D969}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2708C2DC-F14E-4152-B869-AF511DE7D969}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2708C2DC-F14E-4152-B869-AF511DE7D969}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2708C2DC-F14E-4152-B869-AF511DE7D969}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -96,6 +104,8 @@ Global
 		{79721675-E274-4EA7-B470-7E04C3FB2629} = {9C47EA7D-7FF1-4A60-83AA-6B75B5113FF7}
 		{42145100-11EA-45D5-A9C6-FC7649DB45AC} = {79721675-E274-4EA7-B470-7E04C3FB2629}
 		{9F4AEAF1-ED27-4852-AACC-1918C2266775} = {33D4179C-157E-4FEC-8019-36E49148103F}
+		{6EA7CC12-8112-42FD-9A51-AAF4BBF2EBA9} = {C2529471-3AAF-4056-8CF1-27691E220F13}
+		{2708C2DC-F14E-4152-B869-AF511DE7D969} = {6EA7CC12-8112-42FD-9A51-AAF4BBF2EBA9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {07D1A138-9CFA-4B4A-B0E6-0B1C89126081}

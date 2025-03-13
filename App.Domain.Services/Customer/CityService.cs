@@ -1,4 +1,5 @@
-﻿using App.Domain.Core.Customer.Data;
+﻿using App.Domain.Core.Contract.Dapper_Repositories_Interfaces;
+using App.Domain.Core.Customer.Data;
 using App.Domain.Core.Customer.DTOs;
 using App.Domain.Core.Customer.Entities;
 using App.Domain.Core.Customer.Services;
@@ -14,12 +15,14 @@ namespace App.Domain.Services.Customer
     {
         #region Fileds
         private readonly ICityRepository _cityRepository;
+        private readonly ICityRepoDapper cityRepoDapper;
         #endregion
 
         #region Ctors
-        public CityService(ICityRepository cityRepository)
+        public CityService(ICityRepository cityRepository,ICityRepoDapper cityRepoDapper)
         {
             _cityRepository = cityRepository;
+            this.cityRepoDapper = cityRepoDapper;
         }
         #endregion
 
@@ -39,7 +42,7 @@ namespace App.Domain.Services.Customer
 
 
         public async Task<List<CityDto>> GetCities(CancellationToken cancellationToken)
-            => await _cityRepository.GetCities(cancellationToken);
+            => await cityRepoDapper.GetCities(cancellationToken);
 
 
         //public async Task<City> HardDeleteCity(int cityId, CancellationToken cancellationToken)

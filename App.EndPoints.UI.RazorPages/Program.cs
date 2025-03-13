@@ -7,6 +7,7 @@ using App.Domain.Core.Admin.Entities;
 using App.Domain.Core.Admin.Entities.Configs;
 using App.Domain.Core.Admin.Services;
 using App.Domain.Core.Contract.AppService_Interfaces;
+using App.Domain.Core.Contract.Dapper_Repositories_Interfaces;
 using App.Domain.Core.Contract.Repository_Interfaces;
 using App.Domain.Core.Contract.Service_Interfaces;
 using App.Domain.Core.Customer.AppServices;
@@ -19,6 +20,7 @@ using App.Domain.Services.Admin;
 using App.Domain.Services.Customer;
 using App.Domain.Services.Expert;
 using App.EndPoints.UI.RazorPages.Infrastructure;
+using App.Infra.Data.Repos.Dapper;
 using App.Infra.Data.Repos.Ef.Admin;
 using App.Infra.Data.Repos.Ef.Customer;
 using App.Infra.Data.Repos.Ef.Expert;
@@ -53,6 +55,7 @@ builder.Services.AddScoped<IAddressAppService, AddressAppService>();
 builder.Services.AddScoped<ICityRepository, CityRepository>();
 builder.Services.AddScoped<ICityService, CityService>();
 builder.Services.AddScoped<ICityAppService, CityAppService>();
+builder.Services.AddScoped<ICityRepoDapper, CityRepoDapper>();
 #endregion
 
 #region CommentDI

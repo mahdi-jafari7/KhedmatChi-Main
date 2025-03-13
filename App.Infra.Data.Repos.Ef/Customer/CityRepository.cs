@@ -38,38 +38,38 @@ namespace App.Infra.Data.Repos.Ef.Customer
             return submittedCity;
         }
 
-        public async Task<List<CityDto>> GetCities(CancellationToken cancellationToken)
-        {
-            var cities = _memoryCache.Get<List<CityDto>>("cityDtos");
+        //public async Task<List<CityDto>> GetCities(CancellationToken cancellationToken)
+        //{
+        //    var cities = _memoryCache.Get<List<CityDto>>("cityDtos");
 
-            if (cities is null)
-            {
-                cities = await _homeServiceDbContext.Cities
-                .Select(c => new CityDto()
-                {
-                    Id = c.Id,
-                    Name = c.Name,
-                    //ProvinceName = c.Province.Name
-                }).ToListAsync(cancellationToken);
+        //    if (cities is null)
+        //    {
+        //        cities = await _homeServiceDbContext.Cities
+        //        .Select(c => new CityDto()
+        //        {
+        //            Id = c.Id,
+        //            Name = c.Name,
+        //            //ProvinceName = c.Province.Name
+        //        }).ToListAsync(cancellationToken);
 
-                if (cities is null)
-                {
-                    _logger.LogError("We expected the cityDtos to return from the database, but it returned null.");
-                    throw new Exception("Something wents wrong!, please try again.");
-                }
-                else
-                {
-                    _memoryCache.Set("cityDtos", cities, new MemoryCacheEntryOptions()
-                    {
-                        SlidingExpiration = TimeSpan.FromSeconds(120)
-                    });
-                    _logger.LogInformation("cityDtos returned from database, and cached in memory successfully.");
-                    return cities;
-                }
-            }
-            _logger.LogInformation("cityDtos returned from InMemoryCache.");
-            return cities;
-        }
+        //        if (cities is null)
+        //        {
+        //            _logger.LogError("We expected the cityDtos to return from the database, but it returned null.");
+        //            throw new Exception("Something wents wrong!, please try again.");
+        //        }
+        //        else
+        //        {
+        //            _memoryCache.Set("cityDtos", cities, new MemoryCacheEntryOptions()
+        //            {
+        //                SlidingExpiration = TimeSpan.FromSeconds(120)
+        //            });
+        //            _logger.LogInformation("cityDtos returned from database, and cached in memory successfully.");
+        //            return cities;
+        //        }
+        //    }
+        //    _logger.LogInformation("cityDtos returned from InMemoryCache.");
+        //    return cities;
+        //}
 
         public async Task<CityDto> GetCityById(int cityId, CancellationToken cancellationToken)
         {
