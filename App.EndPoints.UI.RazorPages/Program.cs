@@ -112,6 +112,7 @@ builder.Services.AddScoped<IProposalAppService, ProposalAppService>();
 builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
 builder.Services.AddScoped<IServiceService, ServiceService>();
 builder.Services.AddScoped<IServiceAppService, ServiceAppService>();
+builder.Services.AddScoped<IServiceRepoDapper, ServiceRepoDapper>();
 #endregion
 
 #region SkillDI

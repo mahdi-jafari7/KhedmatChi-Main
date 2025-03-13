@@ -72,40 +72,40 @@ namespace App.Infra.Data.Repos.Ef.Expert
             }
         }
 
-        public async Task<List<ServiceDto>> GetServices(CancellationToken cancellationToken)
-        {
-            var services = _memoryCache.Get<List<ServiceDto>>("serviceDtos");
+        //public async Task<List<ServiceDto>> GetServices(CancellationToken cancellationToken)
+        //{
+        //    var services = _memoryCache.Get<List<ServiceDto>>("serviceDtos");
 
-            if (services is null)
-            {
-                services = await _homeServiceDbContext.Services
-                .Select(a => new ServiceDto()
-                {
-                    Id = a.Id,
-                    Title = a.Title,
-                    Description = a.Description,
-                    IsDeleted = a.IsDeleted,
-                    Image = a.Image
-                }).ToListAsync(cancellationToken);
+        //    if (services is null)
+        //    {
+        //        services = await _homeServiceDbContext.Services
+        //        .Select(a => new ServiceDto()
+        //        {
+        //            Id = a.Id,
+        //            Title = a.Title,
+        //            Description = a.Description,
+        //            IsDeleted = a.IsDeleted,
+        //            Image = a.Image
+        //        }).ToListAsync(cancellationToken);
 
-                if (services is null)
-                {
-                    _logger.LogError("We expected the serviceDtos to return from the database, but it returned null.");
-                    throw new Exception("Something wents wrong!, please try again.");
-                }
-                else
-                {
-                    _memoryCache.Set("serviceDtos", services, new MemoryCacheEntryOptions()
-                    {
-                        SlidingExpiration = TimeSpan.FromSeconds(120)
-                    });
-                    _logger.LogInformation("serviceDtos returned from database, and cached in memory successfully.");
-                    return services;
-                }
-            }
-            _logger.LogInformation("serviceDtos returned from InMemoryCache.");
-            return services;
-        }
+        //        if (services is null)
+        //        {
+        //            _logger.LogError("We expected the serviceDtos to return from the database, but it returned null.");
+        //            throw new Exception("Something wents wrong!, please try again.");
+        //        }
+        //        else
+        //        {
+        //            _memoryCache.Set("serviceDtos", services, new MemoryCacheEntryOptions()
+        //            {
+        //                SlidingExpiration = TimeSpan.FromSeconds(120)
+        //            });
+        //            _logger.LogInformation("serviceDtos returned from database, and cached in memory successfully.");
+        //            return services;
+        //        }
+        //    }
+        //    _logger.LogInformation("serviceDtos returned from InMemoryCache.");
+        //    return services;
+        //}
 
         public async Task<List<ServiceDto>> GetServicesByCategoryId(int categoryId, CancellationToken cancellationToken)
         {

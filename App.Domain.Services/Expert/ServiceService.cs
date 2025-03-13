@@ -1,4 +1,5 @@
-﻿using App.Domain.Core.Expert.Data;
+﻿using App.Domain.Core.Contract.Dapper_Repositories_Interfaces;
+using App.Domain.Core.Expert.Data;
 using App.Domain.Core.Expert.DTOs;
 using App.Domain.Core.Expert.Entities;
 using App.Domain.Core.Expert.Services;
@@ -14,12 +15,14 @@ namespace App.Domain.Services.Expert
     {
         #region Fields
         private readonly IServiceRepository _serviceRepository;
+        private readonly IServiceRepoDapper _serviceRepoDapper;
         #endregion
 
         #region Ctors
-        public ServiceService(IServiceRepository serviceRepository)
+        public ServiceService(IServiceRepository serviceRepository, IServiceRepoDapper serviceRepoDapper)
         {
             _serviceRepository = serviceRepository;
+            _serviceRepoDapper = serviceRepoDapper;
         }
         #endregion
 
@@ -41,7 +44,7 @@ namespace App.Domain.Services.Expert
             => await _serviceRepository.GetServiceById(serviceId, cancellationToken);
 
         public async Task<List<ServiceDto>> GetServices(CancellationToken cancellationToken)
-            => await _serviceRepository.GetServices(cancellationToken);
+            => await _serviceRepoDapper.GetServices(cancellationToken);
 
 		public async Task<List<ServiceDto>> GetServicesByCategoryId(int categoryId, CancellationToken cancellationToken)
 		    => await _serviceRepository.GetServicesByCategoryId(categoryId, cancellationToken);
