@@ -19,6 +19,7 @@
                         </div>
                         <div class="author-wrap-ngh-info">
                             <h5>@Model.Expert.FirstName @Model.Expert.LastName</h5>
+                            <h6>سن: @Model.Expert.Age سال</h6>
                             <div class="Goodup-location"><i class="fas fa-map-marker-alt"></i>@Model.Expert.Address.City.Name - @Model.Expert.Address.Street</div>
                         </div>
                     </div>
@@ -26,30 +27,30 @@
                     <div class="author-wrap-caption-ngh">
                         <div class="author-wrap-jhyu-ngh">
                             <ul>
-                                @* <li>
+                                 <li>
                                     <div class="gdup-kvty">
                                         <div class="gdup-kvty-icon bg-light-sky text-sky"><i class="fas fa-file"></i></div>
                                         <div class="gdup-kvty-ctr"><h6 class="count">310</h6></div>
                                         <div class="gdup-kvty-text">آگهی</div>
                                     </div>
-                                </li> *@
-                                @* <li>
+                                </li> 
+                                <li>
                                     <div class="gdup-kvty">
                                         <div class="gdup-kvty-icon bg-light-warning text-warning"><i class="fas fa-thumbs-up"></i></div>
                                         <div class="gdup-kvty-ctr"><h6 class="count">22</h6><span>نفر</span></div>
                                         <div class="gdup-kvty-text">میانگین امتیازات</div>
                                     </div>
-                                </li> *@
-                                @* <li>
+                                </li> 
+                                 <li>
                                     <div class="gdup-kvty">
                                         <div class="gdup-kvty-icon bg-light-danger text-danger"><i class="fas fa-heart"></i></div>
                                         <div class="gdup-kvty-ctr"><h6 class="count">206</h6></div>
                                         <div class="gdup-kvty-text">دنبال کنندگان</div>
                                     </div>
-                                </li> *@
+                                </li> 
                             </ul>
                         </div>
-                        @* <div class="author-wrap-yuio-ngh mt-5">
+                        <div class="author-wrap-yuio-ngh mt-5">
                         <div class="row g-4">
                         <div class="col-6">
                         <a href="javascript:void(0);" class="adv-btn full-width">دنبال کردن</a>
@@ -58,11 +59,17 @@
                         <a href="javascript:void(0);" class="adv-btn full-width">ارسال پیام</a>
                         </div>
                         </div>
-                        </div> *@
+                        </div> 
                     </div>
 
                     <div class="author-wrap-footer-ngh">
                         <ul>
+                            <li>
+                                <div class="jhk-list-inf">
+                                    <div class="jhk-list-inf-ico"><i class="fas fa-envelope"></i></div>
+                                    <div class="jhk-list-inf-caption"><h5>میانگین امتیازات</h5><p>@Model.Expert.AverageScores</p></div>
+                                </div>
+                            </li>
                             <li>
                                 <div class="jhk-list-inf">
                                     <div class="jhk-list-inf-ico"><i class="fas fa-envelope"></i></div>
@@ -79,6 +86,13 @@
                                 <div class="jhk-list-inf">
                                     <div class="jhk-list-inf-ico"><i class="fas fa-map-marker-alt"></i></div>
                                     <div class="jhk-list-inf-caption"><h5>آدرس</h5><p>@Model.Expert.Address.City.Name - @Model.Expert.Address.Street</p></div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="jhk-list-inf">
+                                    <div class="jhk-list-inf-ico"><i class="fas fa-map-marker-alt"></i></div>
+                                    <div class="jhk-list-inf-caption"><h5>درباره متخصص:</h5><p>@Model.Expert.AboutMe </p></div>
                                 </div>
                             </li>
                             @* <li>
