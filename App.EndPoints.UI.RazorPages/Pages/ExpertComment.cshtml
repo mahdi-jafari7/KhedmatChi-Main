@@ -1,0 +1,43 @@
+﻿@page
+@model ExpertCommentModel
+@{
+    ViewData["Title"] = "نظرات متخصص";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">💬 نظرات متخصص</h2>
+
+    @if (Model.Comments.Any())
+    {
+        <div class="row">
+            @foreach (var comment in Model.Comments)
+            {
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <img src="@comment.CustomerImageUrl" alt="تصویر مشتری"
+                                     class="rounded-circle me-3" width="50" height="50">
+                                <div>
+                                    <h5 class="mb-0">@comment.CustomerName</h5>
+                                    <small class="text-muted">@comment.CreationDate.ToShortDateString()</small>
+                                </div>
+                            </div>
+                            <p class="card-text">@comment.Description</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-primary p-2">⭐ امتیاز: @comment.Rate</span>
+                                <span class="text-muted">💼 @comment.ServiceName</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning text-center" role="alert">
+            هنوز هیچ نظری ثبت نشده است! 😢
+        </div>
+    }
+</div>

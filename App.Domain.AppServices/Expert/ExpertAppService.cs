@@ -45,6 +45,10 @@ namespace App.Domain.AppServices.Expert
         public async Task<ExpertDto> UpdateExpert(ExpertProfileDto expertProfileDto, CancellationToken cancellationToken)
             => await _expertService.UpdateExpert(expertProfileDto, cancellationToken);
 
+        public async Task<int?> GetExpertIdByUserIdAsync(int applicationUserId)
+            => await _expertService.GetExpertIdByUserIdAsync(applicationUserId);
+
+
         #endregion
     }
 }

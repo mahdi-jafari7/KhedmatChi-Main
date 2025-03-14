@@ -20,7 +20,7 @@ namespace App.Domain.Core.Customer.Entities
         public int ExpertId { get; set; }
         public Expert.Entities.Expert Expert { get; set; }
         public string? ServiceName { get; set; }
-        public int? ServiceRequestId { get; set; }
+        public int ServiceRequestId { get; set; }
         public ServiceRequest? ServiceRequest { get; set; }
     }
 }

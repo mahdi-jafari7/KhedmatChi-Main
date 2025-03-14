@@ -134,19 +134,7 @@ namespace App.Infra.Data.Repos.Ef.Expert
             _logger.LogInformation("expertDtos returned from InMemoryCache.");
             return experts;
         }
-        //{
-        //    var experts = await _homeServiceDbContext.Experts.ToListAsync(cancellationToken);
-        //    if (experts != null)
-        //    {
-        //        return experts;
-        //    }
-        //    else
-        //    {
-        //        //throw an exception - will be implement!
-        //        throw new InvalidOperationException();
-        //    }
-        //}
-
+       
         //public async Task<Domain.Core.Expert.Entities.Expert> HardDeleteExpert(int expertId, CancellationToken cancellationToken)
         //{
         //    var deletedExpert = await GetExpert(expertId, cancellationToken);
@@ -217,6 +205,15 @@ namespace App.Infra.Data.Repos.Ef.Expert
             updatedExpertDto.Age = updatedExpert.Age;
             updatedExpertDto.AboutMe = updatedExpert.AboutMe;
             return updatedExpertDto;
+        }
+
+
+        public async Task<int?> GetExpertIdByUserIdAsync(int applicationUserId)
+        {
+            return await _homeServiceDbContext.Experts
+                .Where(e => e.ApplicationUserId == applicationUserId)
+                .Select(e => (int?)e.Id)
+                .FirstOrDefaultAsync();
         }
         #endregion
 

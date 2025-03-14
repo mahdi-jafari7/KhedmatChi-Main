@@ -75,6 +75,10 @@ namespace App.Domain.Services.Expert
             _memoryCache.Remove("expertDto");
             return await _expertRepository.UpdateExpert(expertDto, cancellationToken);
         }
+        public async Task<int?> GetExpertIdByUserIdAsync(int applicationUserId)
+        {
+            return await _expertRepository.GetExpertIdByUserIdAsync(applicationUserId);
+        }
 
         #endregion
     }

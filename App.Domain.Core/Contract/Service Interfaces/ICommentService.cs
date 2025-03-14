@@ -17,6 +17,10 @@ namespace App.Domain.Core.Customer.Services
         public Task<List<CommentDto>> GetComments(CancellationToken cancellationToken);
         public Task<CommentDto> ConfirmComment(int commentId, CancellationToken cancellationToken);
         public Task<List<CommentDto>> GetCommentsByExpertId(int expertId, int onlineCutomerId, CancellationToken cancellationToken);
+      
         public Task<CommentDto> GetCustomerCommentByServiceRequestId(int customerId, int serviceRequestId, CancellationToken cancellationToken);
+
+        public Task<List<CommentDto>> GetCommentsByExpertIdAsync(int expertId);
+
     }
 }

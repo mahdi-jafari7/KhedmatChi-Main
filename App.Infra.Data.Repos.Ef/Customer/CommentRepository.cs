@@ -82,7 +82,7 @@ namespace App.Infra.Data.Repos.Ef.Customer
             if (customerComment == null)
             {
                 _logger.LogError($"Customer Comment Returned Null From Data Base!. CustomerId{customerId}, ExpertId{serviceRequestId}.");
-                //we can throw error?!
+                
             }
 
             return customerComment;
@@ -215,10 +215,33 @@ namespace App.Infra.Data.Repos.Ef.Customer
             }
             else
             {
-                //throw an exception - will be implement!
+                
                 throw new InvalidOperationException();
             }
         }
+
+        public async Task<List<CommentDto>> GetCommentsByExpertIdAsync(int expertId)
+        {
+            return await _homeServiceDbContext.Comments
+                .Where(c => c.ExpertId == expertId)
+                .Select(c => new CommentDto
+                {
+                    Id = c.Id,
+                    Description = c.Description,
+                    CreationDate = c.CreateDate,
+                    IsConfirmed = c.IsConfirmed,
+                    Rate = c.Rate,
+                    CustomerId = c.CustomerId,
+                    CustomerName = c.Customer.FirstName + c.Customer.LastName,
+                    CustomerImageUrl = c.Customer.ProfileImage,
+                    ExpertId = c.ExpertId,
+                    ExpertName = c.Expert.FirstName + c.Expert.LastName,
+                    ServiceRequestId = c.ServiceRequestId,
+                    ServiceName = c.ServiceName
+                }).ToListAsync();
+                
+        }
+
 
         public async Task<CommentDto> ConfirmComment(int  commentId, CancellationToken cancellationToken)
         {
