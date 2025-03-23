@@ -1,5 +1,5 @@
-# KhidmatChi - Home Services
-"KhidmatChi" is a home services website developed using .NET 8 and Razor Pages. This platform allows customers, specialists, and admins to interact for providing and receiving home services.
+# KhedmatChi - Home Services
+KhedmatChi is a home services website developed using .NET 8 and Razor Pages. This platform allows customers, specialists, and admins to interact for providing and receiving home services.
 
 ## ✨ Project Overview
 
