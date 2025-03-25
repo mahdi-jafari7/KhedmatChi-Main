@@ -27,7 +27,7 @@ namespace App.EndPoints.Api.Controllers
             var errors = await _accountappservice.Register(registerDto);
 
             if (errors.Count > 0)
-                return BadRequest(errors); // در صورت وجود خطاها
+                return BadRequest(errors); 
 
             return Ok(new { Message = "ثبت‌نام با موفقیت انجام شد." });
         }

@@ -80,6 +80,10 @@ namespace App.Domain.Services.Expert
             return await _expertRepository.GetExpertIdByUserIdAsync(applicationUserId);
         }
 
+        public async Task<int?> GetExpertIdByEmailAsync(string email)
+            => await _expertRepository.GetExpertIdByEmailAsync(email);
+
+
         #endregion
     }
 }

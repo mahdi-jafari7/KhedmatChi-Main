@@ -215,6 +215,14 @@ namespace App.Infra.Data.Repos.Ef.Expert
                 .Select(e => (int?)e.Id)
                 .FirstOrDefaultAsync();
         }
+
+        public async Task<int?> GetExpertIdByEmailAsync(string email)
+        {
+            var expert = await _homeServiceDbContext.Experts
+                .FirstOrDefaultAsync(e => e.ApplicationUser.Email == email);
+
+            return expert?.Id;
+        }
         #endregion
 
         #region PrivateMethods

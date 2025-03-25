@@ -38,7 +38,7 @@ namespace App.Infra.Data.Repos.Dapper
                 SELECT Id, Title, Description, IsDeleted, Image 
                 FROM Categories 
                 WHERE IsDeleted = 0";
-
+                    //*
                     categories = (await connection.QueryAsync<CategoryDto>(query)).ToList();
 
                     if (categories is null)

@@ -1,10 +1,13 @@
 ﻿@page
+@using App.Domain.Core.Expert.AppServices
 @using Framework
 @model App.EndPoints.UI.RazorPages.Pages.CommentModel
 @{
     var serviceRequestStatus = TempData["ServiceRequestStatus"].ToString();
     var serviceRequestId = TempData["ServiceRequestId"];
+    
 }
+@inject IExpertAppService expertappservice;
 
 <!-- ============================ Main Section Start ================================== -->
 <section class="gray">
@@ -111,6 +114,14 @@
 
                 <!-- Message Content -->
                 <div class="dash-msg-content">
+
+                    <a asp-page="ExpertComment" asp-route-expertEmail="@Model.Expert.Email">
+                        <button class="btn btn-success btn-lg shadow-lg" style="width: 250px; font-size: 16px;">
+                            مشاهده کامنت‌های متخصص
+                        </button>
+                    </a>
+
+
 
                     @if (Model.ExpertComments.Count == 0 && Model.CustomerComment == null)
                     {

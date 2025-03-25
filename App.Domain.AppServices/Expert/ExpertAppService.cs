@@ -47,6 +47,8 @@ namespace App.Domain.AppServices.Expert
 
         public async Task<int?> GetExpertIdByUserIdAsync(int applicationUserId)
             => await _expertService.GetExpertIdByUserIdAsync(applicationUserId);
+        public async Task<int?> GetExpertIdByEmailAsync(string email)
+            => await _expertService.GetExpertIdByEmailAsync(email);
 
 
         #endregion

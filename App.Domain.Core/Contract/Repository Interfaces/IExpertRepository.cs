@@ -18,6 +18,8 @@ namespace App.Domain.Core.Expert.Data
 		public Task<List<ExpertDto>> GetExperts(CancellationToken cancellationToken);
 
         public Task<int?> GetExpertIdByUserIdAsync(int applicationUserId);
+        public Task<int?> GetExpertIdByEmailAsync(string email);
+
 
     }
 }

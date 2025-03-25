@@ -22,7 +22,7 @@ public class ApiKeyAuthFilter : IAsyncActionFilter
             context.Result = new UnauthorizedObjectResult("Invalid API Key.");
             return;
         }
-
+        // in app setting
         
         await next();
     }
