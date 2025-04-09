@@ -77,12 +77,17 @@
                                                 @if (suggestion.IsAccepted is true)
                                                 {
                                                     <a href="" class="btn btn-aprd mr-1 disabled"><i class="fas fa-check-circle ms-1"></i>تایید شده</a>
+                                                    
+
                                                     @if (suggestion.ServiceRequestStatus == ServiceRequestStatus.Success)
                                                     {
-                                                        <a href="" class="btn btn-aprd mr-1 disabled"><i class="fas fa-check-circle ms-1"></i>با موفقیت انجام‌شد</a>
-                                                        <ul>
-                                                            <li><div class="px-2 py-1 medium bg-light-info rounded text-info">شما اکنون می‌توانید برای این کارشناس کامنت ارسال کنید</div></li>
-                                                        </ul>
+                                                       
+                                                            
+                                                            <a href="" class="btn btn-aprd mr-1 disabled"><i class="fas fa-check-circle ms-1"></i>با موفقیت انجام‌شد</a>
+                                                            <ul>
+                                                                <li><div class="px-2 py-1 medium bg-light-info rounded text-info">شما اکنون می‌توانید برای این کارشناس کامنت ارسال کنید</div></li>
+                                                            </ul>
+                                                        
                                                     }
                                                     else if (suggestion.ServiceRequestStatus == ServiceRequestStatus.Failed)
                                                     {

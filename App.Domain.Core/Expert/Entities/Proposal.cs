@@ -23,5 +23,6 @@ namespace App.Domain.Core.Expert.Entities
         public Expert Expert { get; set; }
         public int? ServiceRequestId { get; set; }
         public ServiceRequest ServiceRequest { get; set; }
+        //public bool? IsPaid { get; set; }
     }
 }

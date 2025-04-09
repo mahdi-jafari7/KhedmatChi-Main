@@ -29,9 +29,9 @@ namespace App.EndPoints.UI.RazorPages.Pages
 
         //    if (User.IsInRole("Expert"))
         //    {
-        //var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        //var expertId = await _expertAppService.GetExpertIdByUserIdAsync(int.Parse(userId));
-        //int expertIdValue = expertId ?? 0;
+        //        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //        var expertId = await _expertAppService.GetExpertIdByUserIdAsync(int.Parse(userId));
+        //        int expertIdValue = expertId ?? 0;
 
 
         //        Comments = await _commentAppService.GetCommentsByExpertIdAsync(expertIdValue);
@@ -81,7 +81,7 @@ namespace App.EndPoints.UI.RazorPages.Pages
             {
                 expertId = await _expertAppService.GetExpertIdByEmailAsync(expertEmail);
             }
-            
+
 
             if (expertId.HasValue)
             {
@@ -94,6 +94,7 @@ namespace App.EndPoints.UI.RazorPages.Pages
 
             return Page();
         }
+
 
     }
 }

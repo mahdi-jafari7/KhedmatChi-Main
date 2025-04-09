@@ -1,6 +1,7 @@
 ﻿using App.Domain.Core.Admin.Entities;
 using App.Domain.Core.Customer.Entities;
 using App.Domain.Core.Expert.Entities;
+using App.Domain.Core.Other_Entities;
 using App.Infra.Db.SqlServer.Ef.EntityConfigs;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -20,7 +21,7 @@ namespace App.Infra.Db.SqlServer.Ef.DbContext
     {
         public HomeServiceDbContext(DbContextOptions<HomeServiceDbContext> options) : base(options)
         {
-            
+
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -30,7 +31,7 @@ namespace App.Infra.Db.SqlServer.Ef.DbContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new AdminEntityConfig());
-            modelBuilder.ApplyConfiguration(new  ExpertEntityConfig());
+            modelBuilder.ApplyConfiguration(new ExpertEntityConfig());
             modelBuilder.ApplyConfiguration(new CustomerEntityConfig());
             modelBuilder.ApplyConfiguration(new CommentEntityConfig());
             modelBuilder.ApplyConfiguration(new ProposalEntityConfig());
@@ -44,6 +45,10 @@ namespace App.Infra.Db.SqlServer.Ef.DbContext
             //modelBuilder.ApplyConfiguration(new ProvinceEntityConfig());
 
             UserConfigurations.SeedUsers(modelBuilder);
+            modelBuilder.Model.GetEntityTypes()
+    .SelectMany(t => t.GetForeignKeys())
+    .ToList()
+    .ForEach(fk => fk.DeleteBehavior = DeleteBehavior.Restrict);
 
             base.OnModelCreating(modelBuilder);
         }
@@ -60,6 +65,7 @@ namespace App.Infra.Db.SqlServer.Ef.DbContext
         public DbSet<Skill> Skills { get; set; }
         public DbSet<Proposal> Proposals { get; set; }
         public DbSet<City> Cities { get; set; }
+        public DbSet<Payment> Payments { get; set; }
         //public DbSet<Province> Provinces { get; set; }
 
     }

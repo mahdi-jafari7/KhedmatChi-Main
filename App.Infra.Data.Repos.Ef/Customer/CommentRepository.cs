@@ -232,7 +232,7 @@ namespace App.Infra.Data.Repos.Ef.Customer
                     IsConfirmed = c.IsConfirmed,
                     Rate = c.Rate,
                     CustomerId = c.CustomerId,
-                    CustomerName = c.Customer.FirstName + c.Customer.LastName,
+                    CustomerName = c.Customer.FirstName + " " + c.Customer.LastName,
                     CustomerImageUrl = c.Customer.ProfileImage,
                     ExpertId = c.ExpertId,
                     ExpertName = c.Expert.FirstName + c.Expert.LastName,

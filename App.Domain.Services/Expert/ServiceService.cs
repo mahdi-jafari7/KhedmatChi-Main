@@ -70,6 +70,12 @@ namespace App.Domain.Services.Expert
             //updatedService.WorkExperience = serviceDto.WorkExperience;
             return await _serviceRepository.UpdateService(updatedService, cancellationToken);
         }
+        public async Task<List<ServiceDto>> SearchServicesByName(string name, CancellationToken cancellationToken)
+        {
+            var services = await _serviceRepository.SearchServicesByName(name, cancellationToken);
+            return services;
+        }
+
 
         #endregion
     }

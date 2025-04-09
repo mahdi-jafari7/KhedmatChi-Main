@@ -25,5 +25,8 @@ namespace App.Domain.Core.Expert.Enums
         Rejected = 6,
         [Display(Name = "پیشنهاد دیگری پذیرفته‌شد")] //if 'IsRejected' is true
         NotAccepted = 7,
+        [Display(Name = "درانتظار پرداخت")]
+        WaitingForPay = 8
+        
     }
 }

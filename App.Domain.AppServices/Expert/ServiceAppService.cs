@@ -47,6 +47,9 @@ namespace App.Domain.AppServices.Expert
 
         public async Task<ServiceDto> UpdateService(ServiceDto serviceDto, CancellationToken cancellationToken)
             => await _serviceService.UpdateService(serviceDto, cancellationToken);
+        public async Task<List<ServiceDto>> SearchServicesByName(string name, CancellationToken cancellationToken) =>
+            await _serviceService.SearchServicesByName(name, cancellationToken);
+
         #endregion
     }
 }

@@ -41,31 +41,46 @@ namespace App.EndPoints.UI.RazorPages.Pages
         public async Task<IActionResult> OnPostAcceptAsync(CancellationToken cancellationToken)
         {
             await _proposalAppService.AcceptProposal(ConfirmedProposal, cancellationToken);
-            return LocalRedirect("~/MyRequests");
+            //return LocalRedirect("~/MyRequests");
+            //return Redirect(Request.Path + Request.QueryString);
+            return RedirectToPage("/Suggestions", new { serviceRequestId = ConfirmedProposal.ServiceRequestId });
+
         }
 
         public async Task<IActionResult> OnPostRejectAsync(int proposalId, CancellationToken cancellationToken)
         {
             await _proposalAppService.RejectProposal(proposalId, cancellationToken);
-            return LocalRedirect("~/MyRequests");
+            //return LocalRedirect("~/MyRequests");
+            //return Redirect(Request.Path + Request.QueryString);
+            return RedirectToPage("/Suggestions", new { serviceRequestId = ConfirmedProposal.ServiceRequestId });
+
         }
 
         public async Task<IActionResult> OnPostSuccessful(CancellationToken cancellationToken)
         {
             await _serviceRequestAppService.ServiceRequestDoneSuccessfully(ServiceRequestProposalIds, cancellationToken);
-            return LocalRedirect("~/MyRequests");
+            //return LocalRedirect("~/MyRequests");
+            //return Redirect(Request.Path + Request.QueryString);
+            return RedirectToPage("/Suggestions", new { serviceRequestId = ConfirmedProposal.ServiceRequestId });
+
         }
 
         public async Task<IActionResult> OnPostUnsuccessful(CancellationToken cancellationToken)
         {
             await _serviceRequestAppService.ServiceRequestDoneUnSuccessfully(ServiceRequestProposalIds, cancellationToken);
-            return LocalRedirect("~/MyRequests");
+            //return LocalRedirect("~/MyRequests");
+            //return Redirect(Request.Path + Request.QueryString);
+            return RedirectToPage("/Suggestions", new { serviceRequestId = ConfirmedProposal.ServiceRequestId });
+
         }
 
         public async Task<IActionResult> OnPostComment(CommentDto commentDto,CancellationToken cancellationToken)
         {
             await _commentAppService.CreateComment(commentDto, cancellationToken);
-            return LocalRedirect("~/MyRequests");
+            //return LocalRedirect("~/MyRequests");
+            //return Redirect(Request.Path + Request.QueryString);
+            return RedirectToPage("/Suggestions", new { serviceRequestId = ConfirmedProposal.ServiceRequestId });
+
 
         }
     }

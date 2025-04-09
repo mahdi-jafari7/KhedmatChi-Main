@@ -44,5 +44,6 @@ namespace App.Domain.Core.Expert.DTOs
         public ServiceRequestStatus ServiceRequestStatus { get; set; }
         public string? ServiceName { get; set; }
         public string? CategoryName { get; set; }
+        //public bool? IsPaid { get; set; }
     }
 }

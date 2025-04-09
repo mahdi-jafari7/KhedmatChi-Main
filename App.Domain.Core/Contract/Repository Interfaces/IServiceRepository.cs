@@ -17,5 +17,7 @@ namespace App.Domain.Core.Expert.Data
 		public Task<List<ServiceDto>> GetServicesByCategoryId(int categoryId, CancellationToken cancellationToken);
 		//public Task<List<ServiceDto>> GetServices(CancellationToken cancellationToken);
         public Task<bool> RestoreDeletedService(int serviceId, CancellationToken cancellationToken);
+        public Task<List<ServiceDto>> SearchServicesByName(string name, CancellationToken cancellationToken);
+
     }
 }

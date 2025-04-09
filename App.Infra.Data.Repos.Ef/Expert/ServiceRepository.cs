@@ -205,6 +205,17 @@ namespace App.Infra.Data.Repos.Ef.Expert
 
             return updatingServiceDto;
         }
+
+        public async Task<List<ServiceDto>> SearchServicesByName(string name, CancellationToken cancellationToken)
+        {
+            return await _homeServiceDbContext.Services
+                .Where(s => s.Title.Contains(name))
+                .Select(s => new ServiceDto
+                {
+                    Id = s.Id,
+                    Title = s.Title
+                }).ToListAsync(cancellationToken);
+        }
         #endregion
 
         #region PrivateFields

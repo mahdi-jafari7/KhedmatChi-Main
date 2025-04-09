@@ -10,27 +10,17 @@
         <h2 class="display-4 fw-bold">سرویس آنلاین ارائه‌دهنده انواع خدمات منزل</h2>
 
         <div class="search-box bg-white shadow-sm rounded p-3 mt-4">
-            <form class="row g-2">
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <input type="text" class="form-control" placeholder="جستجوی سرویس (مثلا برقکاری، کارواش)" />
+            <div class="row g-2">
+                <div class="col-lg-10 col-md-9 col-sm-12">
+                    <input type="text" id="service-search" class="form-control" placeholder="جستجوی سرویس (مثلا برقکاری، کارواش)" />
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <input type="text" class="form-control" placeholder="انتخاب موقعیت مکانی" />
+                <div class="col-lg-2 col-md-3 col-sm-12">
+                    <button class="btn btn-danger w-100" type="button">جستجو <i class="fas fa-search"></i></button>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <select class="form-select">
-                        <option selected>انتخاب دسته بندی</option>
-                        @foreach (var category in Model.Categories)
-                        {
-                            <option value="@category.Id">@category.Title</option>
-                        }
-                    </select>
-                </div>
-                <div class="col-lg-2 col-md-6 col-sm-12">
-                    <button class="btn btn-danger w-100" type="submit">جستجو <i class="fas fa-search"></i></button>
-                </div>
-            </form>
+            </div>
+            <div id="search-results" class="mt-3"></div>
         </div>
+
     </div>
 </div>
 <section class="gray middle min">
@@ -81,11 +71,40 @@
 </section>
 
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        document.querySelector(".search-box form").addEventListener("submit", function (e) {
-            e.preventDefault();
-            alert("جستجو انجام شد!");
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const searchInput = document.getElementById("service-search");
+            const resultsContainer = document.getElementById("search-results");
+
+            searchInput.addEventListener("input", function () {
+                const query = this.value.trim();
+
+                if (query.length < 2) {
+                    resultsContainer.innerHTML = "";
+                    return;
+                }
+
+                fetch(`/SearchServices?term=${encodeURIComponent(query)}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.length === 0) {
+                            resultsContainer.innerHTML = "<p class='text-muted'>سرویسی یافت نشد</p>";
+                            return;
+                        }
+
+                        resultsContainer.innerHTML = `
+                            <ul class="list-group">
+                                ${data.map(item => `
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        ${item.title}
+                                        <a href="/Request?serviceId=${item.id}" class="btn btn-sm btn-outline-danger">مشاهده</a>
+                                    </li>
+                                `).join("")}
+                            </ul>
+                        `;
+                    });
+            });
         });
-    });
-</script>
+    </script>
+}

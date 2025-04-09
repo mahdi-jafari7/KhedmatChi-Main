@@ -1,4 +1,5 @@
 ﻿@page
+@using Framework
 @model ExpertCommentModel
 @{
     ViewData["Title"] = "نظرات متخصص";
@@ -20,7 +21,8 @@
                                      class="rounded-circle me-3" width="50" height="50">
                                 <div>
                                     <h5 class="mb-0">@comment.CustomerName</h5>
-                                    <small class="text-muted">@comment.CreationDate.ToShortDateString()</small>
+                                    <small class="text-muted">@comment.CreationDate.ToPersianString("dddd، dd MMMM yyyy")</small>
+
                                 </div>
                             </div>
                             <p class="card-text">@comment.Description</p>
