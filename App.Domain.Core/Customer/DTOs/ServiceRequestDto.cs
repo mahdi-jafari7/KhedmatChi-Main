@@ -26,6 +26,7 @@ namespace App.Domain.Core.Customer.DTOs
         public int ServiceId { get; set; }
         public string? CustomerName { get; set; }
         public string? ExpertName { get; set; }
-        
+        //public DateTime? Deadline { get; set; }
+
     }
 }

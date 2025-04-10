@@ -20,12 +20,14 @@ namespace App.Domain.Core.Customer.Entities
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
         public int? ExpertId { get; set; }
-        public Expert.Entities.Expert? Expert { get; set; } 
+        public Expert.Entities.Expert? Expert { get; set; }
         public int? CommentId { get; set; }
         public Comment? Comment { get; set; }
         public int ServiceId { get; set; }
+        //public DateTime? DeadLine { get; set; }
         public Service Service { get; set; }
         public List<Proposal> Proposals { get; set; }
         public string? RequestImageUrl { get; set; }
+
     }
 }
