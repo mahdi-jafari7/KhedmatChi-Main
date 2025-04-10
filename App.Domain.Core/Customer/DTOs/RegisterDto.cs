@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -29,5 +30,6 @@ namespace App.Domain.Core.Customer.DTOs
         public string ConfirmPassword { get; set; }
         public bool IsCustomer { get; set; }
         public bool IsExpert { get; set; }
+        public string? ProfileImageURL { get; set; }
     }
 }

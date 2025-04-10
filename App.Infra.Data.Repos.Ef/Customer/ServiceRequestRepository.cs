@@ -227,7 +227,8 @@ namespace App.Infra.Data.Repos.Ef.Customer
                     Status = x.Status,
                     ServiceId = x.ServiceId,
                     ServiceName = x.Service.Title,
-                    ServiceImageUrl = x.Service.Image,
+                    ServiceImageUrl = x.Service.Image
+                    
                 }).ToListAsync(cancellationToken);
 
                 expertRelatedRequests.AddRange(serviceRequestDto);

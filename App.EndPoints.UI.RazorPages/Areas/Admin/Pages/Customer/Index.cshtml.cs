@@ -1,4 +1,5 @@
 using App.Domain.Core.Customer.AppServices;
+using App.Domain.Core.Customer.DTOs;
 using App.Domain.Core.Expert.AppServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,9 +17,13 @@ namespace App.EndPoints.UI.RazorPages.Areas.Admin.Pages.Customer
             _customerAppService = customerAppService;
         }
 
-        public void OnGet()
+        public List<CustomerDto> Customers { get; set; }
+
+        public async Task OnGetAsync(CancellationToken cancellationToken)
         {
+            Customers = await _customerAppService.GetCustomers(cancellationToken);
         }
+    
 
         public async Task<IActionResult> OnGetDelete(int id, CancellationToken cancellationToken)
         {

@@ -40,21 +40,21 @@ namespace App.EndPoints.UI.RazorPages.Areas.Admin.Pages.Customer
             if (!ModelState.IsValid)
             {
                 return Page();
-                
+
             }
-            
+
             if (customerImage is not null)
             {
                 var imageUrl = await _baseAppService.UploadImage(customerImage);
                 UpdatingCustomer.ProfileImage = imageUrl;
             }
-            
+
             CustomerProfileDto updatedCustomer = new CustomerProfileDto()
             {
                 FirstName = UpdatingCustomer.FirstName,
                 LastName = UpdatingCustomer.LastName,
                 Email = UpdatingCustomer.Email,
-                ProfileImageUrl=UpdatingCustomer.ProfileImage
+                ProfileImageUrl = UpdatingCustomer.ProfileImage
 
             };
 
@@ -63,3 +63,5 @@ namespace App.EndPoints.UI.RazorPages.Areas.Admin.Pages.Customer
         }
     }
 }
+
+
