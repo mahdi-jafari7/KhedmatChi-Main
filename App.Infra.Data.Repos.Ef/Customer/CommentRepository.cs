@@ -223,7 +223,7 @@ namespace App.Infra.Data.Repos.Ef.Customer
         public async Task<List<CommentDto>> GetCommentsByExpertIdAsync(int expertId)
         {
             return await _homeServiceDbContext.Comments
-                .Where(c => c.ExpertId == expertId)
+                .Where(c => c.ExpertId == expertId && c.IsConfirmed==true)
                 .Select(c => new CommentDto
                 {
                     Id = c.Id,

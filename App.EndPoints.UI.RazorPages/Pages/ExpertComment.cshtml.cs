@@ -24,44 +24,7 @@ namespace App.EndPoints.UI.RazorPages.Pages
 
         public List<CommentDto> Comments { get; set; }
 
-        //public async Task<IActionResult> OnGetAsync(int? id)
-        //{
-
-        //    if (User.IsInRole("Expert"))
-        //    {
-        //        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        //        var expertId = await _expertAppService.GetExpertIdByUserIdAsync(int.Parse(userId));
-        //        int expertIdValue = expertId ?? 0;
-
-
-        //        Comments = await _commentAppService.GetCommentsByExpertIdAsync(expertIdValue);
-        //    }
-        //    //else if (id.HasValue)
-        //    //{
-
-        //    //    Comments = await _commentAppService.GetCommentsByExpertIdAsync(id.Value);
-        //    //}
-        //    else
-        //    {
-        //        Comments = await _commentAppService.GetCommentsByExpertIdAsync(id.Value);
-        //        //Comments = new List<CommentDto>(); 
-        //    }
-
-        //    return Page();
-        //}
-
-        //public async Task<IActionResult> OnGetAsync(int expertId)
-        //{
-
-        //    if (expertId <= 0)
-        //    {
-        //        return NotFound();
-        //    }
-
-
-        //    Comments = await _commentAppService.GetCommentsByExpertIdAsync(expertId);
-        //    return Page();
-        //}
+       
 
         public async Task<IActionResult> OnGetAsync(int? id, string expertEmail)
         {

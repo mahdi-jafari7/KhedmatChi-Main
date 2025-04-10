@@ -23,17 +23,16 @@ namespace App.EndPoints.UI.RazorPages.Areas.Admin.Pages.Comment
             Comments = await _commentAppService.GetComments(cancellationToken);
         }
 
-        public async Task<IActionResult> OnGetActive(int commentId, CancellationToken cancellationToken)
+        public async Task<IActionResult> OnPostActive(int commentId, CancellationToken cancellationToken)
         {
             await _commentAppService.ConfirmComment(commentId, cancellationToken);
             return RedirectToPage();
         }
 
-        public async Task<IActionResult> OnGetDelete(int commentId, CancellationToken cancellationToken)
+        public async Task<IActionResult> OnPostDelete(int commentId, CancellationToken cancellationToken)
         {
             await _commentAppService.SoftDeleteComment(commentId, cancellationToken);
             return RedirectToPage();
         }
-
     }
 }
